@@ -8,7 +8,7 @@ body{
     background-image: url(../img/fondo.jpg);
 }
 
-.form-DetallePedidos{
+.form-tarjeta{
     width: 500px;
     background: #24303c;
     padding: 30px;
@@ -20,7 +20,7 @@ body{
     box-shadow: 7px 13px 37px #000;
 }
 
-.form-DetallePedidos h4 {
+.form-tarjeta h4 {
     font-size: 22px;
     margin-bottom: 20px;
   }
@@ -37,7 +37,7 @@ body{
     color: white;
   }
 
-  .form-DetallePedidos .buttons {
+  .form-tarjeta .buttons {
     width: 50%;
     background: #1f53c5;
     border: none;
@@ -53,7 +53,7 @@ body{
     background-color: black;
 }
 
-.form-DetallePedidos .radios{
+.form-tarjeta .radios{
   font-size: 18px;
   margin: 2px;
 }

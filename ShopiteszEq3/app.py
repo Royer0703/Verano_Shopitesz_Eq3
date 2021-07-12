@@ -25,12 +25,12 @@ def Carrito():
 @app.route('/detallespedido')
 def DetallesPedido():
     return render_template('DetallePedidos.html')
-@app.route('/terjetas')
+@app.route('/tarjetas')
 def Tarjetas():
     return render_template('tarjetas.html')
 @app.route('/pedidos')
 def Pedidos():
-    return render_template('pedidos.html')
+    return render_template('pedido.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
