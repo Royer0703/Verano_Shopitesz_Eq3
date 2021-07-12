@@ -19,6 +19,18 @@ def CrearCategoria():
 @app.route('/productos/new')
 def CrearProducto():
     return render_template('CrearProducto.html')
+@app.route('/carrito')
+def Carrito():
+    return render_template('Carrito.html')
+@app.route('/detallespedido')
+def DetallesPedido():
+    return render_template('DetallePedidos.html')
+@app.route('/terjetas')
+def Tarjetas():
+    return render_template('tarjetas.html')
+@app.route('/pedidos')
+def Pedidos():
+    return render_template('pedidos.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
