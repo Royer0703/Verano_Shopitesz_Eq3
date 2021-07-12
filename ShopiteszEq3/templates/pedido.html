@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/stylepedido.css')}}">
+    <title>Pedidos</title>
+</head>
+<body>
+    <section class="form-productos">
+        <h4>Pedido</h4>
+        <label for="categoria">Pedido</label>
+        <label>Id Pedido</label>
+        <input class="controls" type="number" name="Id pedido" id="Id pedido" placeholder="1">
+        <label>Id Comprador</label>
+        <input class="controls" type="number" name="Id Comprador" id="Id Comprador" placeholder="2">
+        <label>Id Tarjeta</label>
+        <input class="controls" type="number" name="Id Tarjeta" id="Id Tarjeta" placeholder="">
+        <label>Fecha Registro</label>
+        <input class="controls" type="date" name="Fecha Registro" id="Fecha Registro" placeholder="">
+        <label>Fecha Atencion</label>
+        <input class="controls" type="date" name="Fecha Atencion" id="Fecha Atencion" placeholder="">
+        <label>Fecha Recepcion</label>
+        <input class="controls" type="date" name="Fecha Recepcion" id="Fecha Recepcion" placeholder="">
+        <label>Fecha Cierre</label>
+        <input class="controls" type="date" name="Fecha Cierre" id="Fecha Cierre" placeholder="">
+        <label>Total</label>
+        <input class="controls" type="number" name="Total" id="Total" placeholder="">
+        <label for="">Estatus</label>
+        <input class="radios" type="radio" id="Activo" name="estatus" value="Activo" checked>
+        <label class="radios" for="Activo">Activo</label>
+        <input class="radios" type="radio" id="Inactivo" name="estatus" value="Activo">
+        <label class="radios" for="Activo">Inactivo</label>
+        <br>
+        <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Guardar"></a>
+        <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Cancelar"></a>
+    </section>
+</body>
+</html>

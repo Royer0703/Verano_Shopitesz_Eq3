@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/stylepedido.css')}}">
+    <title>Pedidos</title>
+</head>
+<body>
+    <section class="form-productos">
+        <h4>Pedido</h4>
+        <label for="categoria">Pedido</label>
+        <label>Id Tarjeta</label>
+        <input class="controls" type="number" name="Id Tarjeta" id="Id Tarjeta" placeholder="1">
+        <label>Id Usuario</label>
+        <input class="controls" type="number" name="Id Usuario" id="Id Usuario" placeholder="2">
+        <label>no Tarjeta</label>
+        <input class="controls" type="number" name="no Tarjeta" id="no Tarjeta" placeholder="">
+        <label>Saldo</label>
+        <input class="controls" type="number" name="Saldo" id="Saldo" placeholder="">
+        <label>Banco</label>
+        <input class="controls" type="text" name="Banco" id="Banco" placeholder="Banamex">
+     
+        <label for="">Estatus</label>
+        <input class="radios" type="radio" id="Activo" name="estatus" value="Activo" checked>
+        <label class="radios" for="Activo">Activo</label>
+        <input class="radios" type="radio" id="Inactivo" name="estatus" value="Activo">
+        <label class="radios" for="Activo">Inactivo</label>
+        <br>
+        <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Guardar"></a>
+        <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Cancelar"></a>
+    </section>
+</body>
+</html>
