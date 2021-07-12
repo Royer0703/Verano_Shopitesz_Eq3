@@ -4,19 +4,37 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Productos</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/styleCrearProducto.css')}}">
+    <title>Registrar Productos</title>
 </head>
 <body>
     <section class="form-productos">
-        <h4>Registrar Categorias</h4>
-        <label>Nombre de la Categoria</label>
+        <h4>Registrar Productos</h4>
+        <label for="categoria">Categoria</label>
+        <select class="seleccion" name="categoria" id="">
+            <option value="Elije">Elije la categoria</option>
+            <option value="Telefonía,">Telefonía</option>
+            <option value="Equipo de Computo,">Equipo de Computo</option>
+            <option value="Videojuegos,">Videojuegos</option>
+        </select>
+        <br>
+        <label>Nombre del producto</label>
         <input class="controls" type="text" name="nombre" id="nombre" placeholder="Ingresa el nombre de la categoria">
+        <label>Descripción</label>
+        <input class="controls" type="text" name="descripcion" id="descripcion" placeholder="Ingresa su descripcion">
+        <label>Precio</label>
+        <input class="controls" type="number" name="precio" id="precio" placeholder="Ingresa su precio">
+        <label>Existencia</label>
+        <input class="controls" type="number" name="existencia" id="existencia" placeholder="Ingresa su existencia">
+        <label>Seleciona una archivo:</label>
+        <input class="controls" type="file" id="file" accept="application/pdf">
         <label>Seleciona una imagen:</label>
         <input class="controls" type="file" id="file" accept="image/*">
-        <input type="radio" id="Activo" name="estatus" value="Activo" checked>
-        <label for="Activo">Activo</label>
-        <input type="radio" id="Inactivo" name="estatus" value="Activo">
-        <label for="Activo">Inactivo</label>
+        <label for="">Estatus</label>
+        <input class="radios" type="radio" id="Activo" name="estatus" value="Activo" checked>
+        <label class="radios" for="Activo">Activo</label>
+        <input class="radios" type="radio" id="Inactivo" name="estatus" value="Activo">
+        <label class="radios" for="Activo">Inactivo</label>
         <br>
         <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Guardar"></a>
         <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Cancelar"></a>
