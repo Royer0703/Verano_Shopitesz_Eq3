@@ -1,27 +1,12 @@
-<!DOCTYPE html>
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static',filename='css/styleIndex.css')}}">
-    <title>Pagina Principal</title>
-</head>
-
-<body>
-    <nav>
-        <ul>
-            <li><a href="/categorias/new">Crear Categoria</a></li>
-            <li><a href="/productos/new">Productos</a></li>
-            <li><a href="/carrito">Carrito</a></li>
-            <li><a href="/detallespedido">Detalles Pedidos</a></li>
-            <li><a href="/pedidos">Pedidos</a></li>
-            <li><a href="/tarjetas">Tarjetas</a></li>
-            <li id="cerrarSesion"><a href="/">Cerrar sesión</a></li>
-        </ul>
-    </nav>
-</body>
-
-</html>
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/styleLogin.css')}}">
+    {{super()}}
+    {%if current_user.is_authenticated %}
+        <p>Bienvenido <b>{{current_user.nombreCompleto}}</b></p>
+    {% endif %}
+{% endblock %}

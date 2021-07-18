@@ -1,3 +1,6 @@
+{% extends 'comunes/base.html' %}
+{% block contenido %}
+    {{super()}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,13 +11,14 @@
   <title>Crear Cuenta</title>
 </head>
 <body>
-  <section class="form-CrearCuenta">
+  <form class="form-CrearCuenta" method="post" enctype="multipart/form-data">
     <h4>Formulario Registro</h4>
-    <input class="controls" type="text" name="nombres" id="nombres" placeholder="Ingrese su Nombre Completo">
-    <input class="controls" type="text" name="apellidos" id="apellidos" placeholder="Ingrese su direccio">
+    <input class="controls" type="text" name="nombre" id="nombres" placeholder="Ingrese su Nombre Completo">
+    <input class="controls" type="text" name="direccion" id="apellidos" placeholder="Ingrese su direccio">
     <input class="controls" type="tel" name="telefono" id="telefono" placeholder="Ingrese su Telefono">
-    <input class="controls" type="email" name="correo" id="correo" placeholder="Ingrese su Correo">
-    <input class="controls" type="password" name="pass" id="pass" placeholder="Ingrese su Contraseña">
+    <input class="controls" type="email" name="email" id="correo" placeholder="Ingrese su Correo">
+    <input class="controls" type="password" name="password" id="pass" placeholder="Ingrese su Contraseña">
+    {% if current_user.is_authenticated and current_user.is_admin() %}
     <label class="radios" for="">Tipo: </label>
     <input class="radios" type="radio" id="cliente" name="cliente" value="Cliente" checked>
     <label class="radios" for="cliente">Cliente</label>
@@ -22,16 +26,19 @@
     <label class="radios" for="vendedor">Vendedor</label>
     <input class="radios" type="radio" id="administrador" name="administrador" value="Administrador">
     <label class="radios" for="administrador">Vendedor</label>
+    {% endif %}
     <br>
-    <label class="radios" for="">Estatus: </label>
-    <input class="radios" type="radio" id="Activo" name="estatus" value="Activo" checked>
-    <label class="radios" for="Activo" id="tipo">Activo</label>
-    <input class="radios" type="radio" id="Inactivo" name="estatus" value="Inactivo">
-    <label class="radios" for="Activo">Inactivo</label>
+    <div class="radios">
+      <label>Genero:</label>
+      <label class="radio-inline"><input type="radio" name="genero" value="F" checked>Femenino</label>
+      <label class="radio-inline"><input type="radio" name="genero" value="M">Masculino</label>
+  </div>
     <p>Estoy de acuerdo con <a href="#">Terminos y Condiciones</a></p>
-    <input class="buttons" type="submit" value="Registrar">
+    <a href="/Usuarios/agregar"><input class="buttons" type="submit" value="Registrar"></a> 
     <p><a href="/">¿Ya tengo Cuenta?</a></p>
-  </section>
+  </form>
 
 </body>
 </html>
+
+{% endblock %}
