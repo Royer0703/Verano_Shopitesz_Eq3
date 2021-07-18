@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/styleCrearCategoria.css')}}">
+    <title>Categorias</title>
+</head>
+
+<body>
+    <section class="form-categorias">
+        <h4>Modificar Categorias</h4>
+        <label>Nombre de la Categoria</label>
+        <input class="controls" type="text" name="nombre" id="nombre" placeholder="Ingresa el nombre de la categoria">
+        <label>Seleciona una imagen:</label>
+        <input class="controls" type="file" id="file" accept="image/*">
+        <input type="radio" id="Activo" name="estatus" value="Activo" checked>
+        <label for="Activo">Activo</label>
+        <input type="radio" id="Inactivo" name="estatus" value="Activo">
+        <label for="Activo">Inactivo</label>
+        <br>
+        <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Guardar"></a>
+        <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Cancelar"></a>
+    </section>
+</body>
+
+</html>
