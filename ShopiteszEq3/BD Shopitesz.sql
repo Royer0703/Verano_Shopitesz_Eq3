@@ -25,7 +25,7 @@ create table Productos(
     estatus varchar(10) not null,
     
     constraint pk_productos primary key(idProducto),
-    foreign key(idCategoria) references categorias(idCategorias)
+    foreign key(idCategoria) references categorias(idCategoria)
 );
 
 create table Usuarios(
@@ -43,7 +43,8 @@ create table Usuarios(
 );
 
 drop table Usuarios;
-select * from Usuarios;
+select * from Productos;
 
 grant select,insert,update,delete on shopitesz.categorias to user_shopitesz;
 grant select,insert,update,delete on shopitesz.Usuarios to user_shopitesz;
+grant select,insert,update,delete on shopitesz.Productos to user_shopitesz;
