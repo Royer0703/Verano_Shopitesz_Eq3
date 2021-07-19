@@ -88,9 +88,7 @@ create table Pedidos(
     estatus varchar(10) not null,
     
     constraint pk_pedidos primary key(idPedido),
-    foreign key(idComprador) references comprador(idComprador),
-    foreign key(idVendedor) references vendedor(idVendedor),
-    foreign key(idTarjeta) references tarjeta(idTarjeta)
+    foreign key(idTarjeta) references tarjetas(idTarjeta)
 );
 
 ----------------------/*DetallesPedidos*/
@@ -108,8 +106,8 @@ create table DetallePedidos(
 	comentario varchar(200) not null,
     
     constraint pk_detalle primary key(idDetalle),
-    foreign key(idPedido) references pedido(idPedido),
-    foreign key(idProducto) references productor(idProducto)
+    foreign key(idPedido) references pedidos(idPedido),
+    foreign key(idProducto) references productos(idProducto)
 );
 
 drop table Categorias;
