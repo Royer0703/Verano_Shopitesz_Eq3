@@ -13,7 +13,7 @@
             <li><a href="/productos">PRODUCTOS</a></li>
           </ul>
         </li>
-       {% if current_user.is_authenticated %}
+
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">PEDIDOS
           <span class="caret"></span></a>
@@ -22,8 +22,7 @@
             <li><a href="/Pedidos">SEGUIMIENTO</a></li>
           </ul>
         </li>
-        {% endif %}
-        {% if current_user.is_authenticated and current_user.is_admin() %}
+
         <li class="dropdown">
           <a class="dropdown-toggle" data-toggle="dropdown" href="#">USUARIOS
           <span class="caret"></span></a>
@@ -33,12 +32,20 @@
             <li><a href="/Usuarios/nuevo">Registro de Usuarios</a></li>
           </ul>
         </li>
-        {% endif %}
+
+        <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">ENVIOS
+          <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/envios/nuevo">Agregar Envio</a></li>
+          </ul>
+        </li>
+
       </ul>
       <ul class="nav navbar-nav navbar-right">
-              {% if not current_user.is_authenticated %}
+
               <li style="float:right"><a href="/Usuarios/iniciarSesion"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesion</a></li>
-              {% else %}
+
               <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                   <span class="glyphicon glyphicon-user"></span>{{current_user.nombreCompleto}}
@@ -48,7 +55,7 @@
                   <li><a href="/Usuarios/cerrarSesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion</a></li>
                 </ul>
               </li>
-              {% endif %}
+
         </ul>
     </div>
   </nav>

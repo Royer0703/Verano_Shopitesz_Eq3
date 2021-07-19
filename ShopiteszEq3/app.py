@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from flask import Flask,render_template,request,redirect,url_for,flash,session,abort
 from flask_bootstrap import Bootstrap
-from modelo.Dao import db,Categoria,Producto,Usuario
+from modelo.Dao import db,Categoria,Producto,Usuario,Envio
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
 app = Flask(__name__)
 Bootstrap(app)
@@ -159,6 +159,41 @@ def agregarCategoria():
             return redirect(url_for('mostrar_login'))
     except:
         abort(500)
+
+#Envios
+@app.route('/envios/nuevo')
+def agregarenvio():
+    return render_template('/Envios/envios.html')
+
+@app.route('/envios/agregar',methods=['post'])
+def agregarEnvio():
+    try:
+        if current_user.is_authenticated:
+            if current_user.is_admin():
+                try:
+                    envio = Envio()
+                    envio.IDPEDIDO = request.form['idpedido']
+                    envio.IDPAQUETERIA = request.form['idpaqueteria']
+                    envio.FECHAENVIO = request.form['fechaenvio']
+                    envio.FECHAENTREGA = request.form['fechaentrega']
+                    envio.NOGUIA = request.form['numeroguia']
+                    envio.PESOPAQUETE = request.form['pesopaquete']
+                    envio.PRECIOGR = request.form['precio']
+                    envio.TOTALAPAGAR = request.form['total']
+                    envio.ESTATUS = request.form['estatus']
+                    envio.agregar()
+                    flash('¡ Envio agregada con exito !')
+                except:
+                    flash('¡ Error al agregar el envio !')
+                return render_template('index.html')
+            else:
+                abort(404)
+
+        else:
+            return render_template('index.html')
+    except:
+        abort(500)
+
 
 
 @app.route('/Categorias/<int:id>')

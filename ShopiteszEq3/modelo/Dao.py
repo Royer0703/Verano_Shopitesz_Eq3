@@ -120,3 +120,23 @@ class Usuario(UserMixin,db.Model):
         db.session.add(self)
         db.session.commit()
 
+
+
+#ENVIOS
+class Envio(UserMixin,db.Model):
+    __tablename__='ENVIOS'
+    IDENVIO=Column(Integer,primary_key=True)
+    IDPEDIDO=Column(Integer,ForeignKey('Pedidos.idPedido'))
+    IDPAQUETERIA=Column(Integer,ForeignKey('PAQUETERIAS.IDPAQUETERIA'))
+    FECHAENVIO=Column(String,nullable=False)
+    FECHAENTREGA=Column(String,nullable=True)
+    NOGUIA=Column(Integer,nullable=False)
+    PESOPAQUETE=Column(Integer,nullable=False)
+    PRECIOGR=Column(Integer,nullable=False)
+    TOTALPAGAR=Column(Integer,nullable=False)
+    ESTATUS=Column(String,nullable=False)
+
+    #Método para agregar un envio
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()

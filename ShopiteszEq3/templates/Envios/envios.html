@@ -1,5 +1,13 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+{{super()}}
+{% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+{{super()}}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,34 +15,43 @@
     <link rel="stylesheet" href="{{url_for('static',filename='css/stylepedido.css')}}">
     <title>Pedidos</title>
 </head>
+
 <body>
-    <section class="form-DetallePedidos">
-        <h4>Pedidos</h4>
-        <label for="">Pedido</label>
+    <form class="form-DetallePedidos" action="/envios/agregar" method="post" enctype="multipart/form-data">
+        <h4>Envios</h4>
         <label>Id Pedido</label>
-        <input class="controls" type="number" name="Id pedido" id="Id pedido" placeholder="">
-        <label>Id Comprador</label>
-        <input class="controls" type="number" name="Id Comprador" id="Id Comprador" placeholder="">
-        <label>Id Tarjeta</label>
-        <input class="controls" type="number" name="Id Tarjeta" id="Id Tarjeta" placeholder="">
-        <label>Fecha Registro</label>
-        <input class="controls" type="date" name="Fecha Registro" id="Fecha Registro" placeholder="">
-        <label>Fecha Atencion</label>
-        <input class="controls" type="date" name="Fecha Atencion" id="Fecha Atencion" placeholder="">
-        <label>Fecha Recepcion</label>
-        <input class="controls" type="date" name="Fecha Recepcion" id="Fecha Recepcion" placeholder="">
-        <label>Fecha Cierre</label>
-        <input class="controls" type="date" name="Fecha Cierre" id="Fecha Cierre" placeholder="">
-        <label>Total</label>
-        <input class="controls" type="number" name="Total" id="Total" placeholder="">
-        <label for="">Estatus</label>
-        <input class="radios" type="radio" id="Activo" name="estatus" value="Activo" checked>
-        <label class="radios" for="Activo">Activo</label>
-        <input class="radios" type="radio" id="Inactivo" name="estatus" value="Activo">
-        <label class="radios" for="Activo">Inactivo</label>
+        <input class="controls" type="number" name="idpedido" placeholder="">
+        <label for="">Paqueteria</label>
+        <select class="radios" name="estatus">
+            <option value="Natacion">DHL</option>
+            <option value="Carreras">ESTAFETA</option>
+            <option value="Salto">FEDEX</option>
+        </select>
         <br>
-        <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Guardar"></a>
-        <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Cancelar"></a>
-    </section>
+        <label>Fecha Envio</label>
+        <input class="controls" type="date" name="fechaenvio" placeholder="">
+        <label>Fecha Entrega</label>
+        <input class="controls" type="date" name="fechaentrega" placeholder="">
+        <label>Numero de Guia</label>
+        <input class="controls" type="number" name="numeroguia" placeholder="">
+        <label>Peso(KG)</label>
+        <input class="controls" type="number" name="pesopaquete" placeholder="">
+        <label>Precio</label>
+        <input class="controls" type="number" name="precio" placeholder="">
+        <label>Total</label>
+        <input class="controls" type="number" name="total" placeholder="">
+        <label for="">Estatus</label>
+        <select class="radios" name="estatus">
+            <option value="Natacion">Pendiente</option>
+            <option value="Carreras">Transito</option>
+            <option value="Salto">Entregado</option>
+        </select>
+        <br>
+        <a href="/"><input class="buttons" type="submit" value="Guardar"></a>
+        <a href="/"><input class="buttons" type="submit" value="Cancelar"></a>
+    </form>
 </body>
+
 </html>
+
+{% endblock %}
