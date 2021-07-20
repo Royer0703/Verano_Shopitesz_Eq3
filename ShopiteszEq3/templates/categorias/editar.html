@@ -10,12 +10,16 @@
 </head>
 
 <body>
-    <form class="form-categorias" method="post" enctype="multipart/form-data">
+    <form class="form-categorias" action="/Categorias/editar" method="post" enctype="multipart/form-data">
         <h4>Modificar Categorias</h4>
         <label>Nombre de la Categoria</label>
-        <input class="controls" type="text" name="nombre" id="nombre" placeholder="Ingresa el nombre de la categoria">
+        <input class="controls" type="text" name="nombre" value="{{cat.nombre}}" placeholder="Ingresa el nombre de la categoria">
         <label>Seleciona una imagen:</label>
         <input class="controls" type="file" id="file" accept="image/*">
+        <a href="#" data-toggle="modal" data-target="#imagen">
+            <span class="glyphicon glyphicon-eye-open"></span>Ver Imagen
+        </a>
+        <br>
         <input type="radio" id="Activo" name="estatus" value="Activo" checked>
         <label for="Activo">Activo</label>
         <input type="radio" id="Inactivo" name="estatus" value="Activo">
@@ -24,6 +28,28 @@
         <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Guardar"></a>
         <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Cancelar"></a>
     </form>
+
+        <!-- Modal para ver la imagen-->
+<div id="imagen" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Imagen de la categoria: <b>{{cat.nombre}}</b></h4>
+        </div>
+        <div class="modal-body">
+          <img src="/Categorias/consultarImagen/{{cat.idCategoria}}" width="200px" height="150px">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  </div>
 </body>
 
 </html>

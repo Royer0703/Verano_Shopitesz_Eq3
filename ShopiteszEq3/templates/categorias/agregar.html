@@ -10,19 +10,16 @@
 </head>
 
 <body>
-    <form class="form-categorias" method="post" enctype="multipart/form-data">
+    <form class="form-categorias" action="/Categorias/agregar" method="post" enctype="multipart/form-data">
         <h4>Registrar Categorias</h4>
         <label>Nombre de la Categoria</label>
         <input class="controls" type="text" name="nombre" id="nombre" placeholder="Ingresa el nombre de la categoria">
         <label>Seleciona una imagen:</label>
-        <input class="controls" type="file" id="file" accept="image/*">
-        <input type="radio" id="Activo" name="estatus" value="Activo" checked>
-        <label for="Activo">Activo</label>
-        <input type="radio" id="Inactivo" name="estatus" value="Activo">
-        <label for="Activo">Inactivo</label>
+        <input class="controls" type="file" id="file" name="imagen" accept="image/*">
+
         <br>
-        <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Guardar"></a>
-        <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Cancelar"></a>
+        <a href="/Categorias/agregar"><input class="buttons" type="submit" value="Guardar"></a>
+        <a href="/"><input class="buttons" type="submit" value="Cancelar"></a>
     </form>
 </body>
 
