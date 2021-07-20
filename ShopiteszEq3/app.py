@@ -46,21 +46,21 @@ def nuevoUsuario():
 
 @app.route('/Usuarios/agregar',methods=['post'])
 def agregarUsuario():
-    try:
-        usuario=Usuario()
-        usuario.nombreCompleto=request.form['nombre']
-        usuario.telefono=request.form['telefono']
-        usuario.direccion=request.form['direccion']
-        usuario.email=request.form['email']
-        usuario.genero=request.form['genero']
-        usuario.password=request.form['password']
-        usuario.tipo=request.values.get("tipo","Comprador")
-        usuario.estatus='Activo'
-        usuario.agregar()
-        flash('¡ Usuario registrado con exito')
-    except:
-        flash('¡ Error al agregar al usuario !')
-    return render_template('usuarios/registrarCuenta.html')
+    #try:
+    usuario=Usuario()
+    usuario.nombreCompleto=request.form['nombre']
+    usuario.telefono=request.form['telefono']
+    usuario.direccion=request.form['direccion']
+    usuario.email=request.form['email']
+    usuario.genero=request.form['genero']
+    usuario.password=request.form['password']
+    usuario.tipo=request.values.get("tipo","Comprador")
+    usuario.estatus='Activo'
+    usuario.agregar()
+       # flash('¡ Usuario registrado con exito')
+    #except:
+       # flash('¡ Error al agregar al usuario !')
+    return render_template('usuarios/CrearCuenta.html')
 
 
 @app.route("/Usuarios/validarSesion",methods=['POST'])
@@ -131,10 +131,10 @@ def consultarImagenCategoria(id):
 @app.route('/Categorias/nueva')
 @login_required
 def nuevaCategoria():
-    if current_user.is_authenticated and current_user.is_admin():
-            return render_template('categorias/agregar.html')
-    else:
-        abort(404)
+   # if current_user.is_authenticated and current_user.is_admin():
+    return render_template('categorias/agregar.html')
+    #else:
+        #abort(404)
 
 @app.route('/Categorias/agregar',methods=['post'])
 @login_required

@@ -11,7 +11,7 @@
   <title>Crear Cuenta</title>
 </head>
 <body>
-  <form class="form-CrearCuenta" method="post" enctype="multipart/form-data">
+  <form class="form-CrearCuenta" method="post" enctype="multipart/form-data" action="/Usuarios/agregar">
     <h4>Formulario Registro</h4>
     <input class="controls" type="text" name="nombre" id="nombres" placeholder="Ingrese su Nombre Completo">
     <input class="controls" type="text" name="direccion" id="apellidos" placeholder="Ingrese su direccio">
@@ -25,7 +25,7 @@
     <input class="radios" type="radio" id="vendedor" name="vendedor" value="Vendedor">
     <label class="radios" for="vendedor">Vendedor</label>
     <input class="radios" type="radio" id="administrador" name="administrador" value="Administrador">
-    <label class="radios" for="administrador">Vendedor</label>
+    <label class="radios" for="administrador">Administrador</label>
     {% endif %}
     <br>
     <div class="radios">
