@@ -1,0 +1,58 @@
+{% extends 'comunes/base.html' %}
+{% block contenido %}
+    {{super()}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="{{url_for('static',filename='css/styleCrearCuenta.css')}}">
+  <title>Editar Cuenta Cuenta</title>
+</head>
+<body>
+  <form class="form-CrearCuenta" action="/Usuarios/modificar" method="post" enctype="multipart/form-data">
+    <h4>Editar Perfil</h4>
+    <input class="controls" type="text" name="nombre" id="nombres" placeholder="Ingrese su Nombre Completo" value="{{current_user.nombreCompleto}}">
+    <input class="controls" type="text" name="direccion" id="apellidos" placeholder="Ingrese su direccio" value="{{current_user.direccion}}">
+    <input class="controls" type="tel" name="telefono" id="telefono" placeholder="Ingrese su Telefono" value="{{current_user.telefono}}">
+    <input class="controls" type="email" name="email" id="correo" placeholder="Ingrese su Correo" value="{{current_user.email}}" readonly>
+    <input class="controls" type="password" name="password" id="pass" placeholder="Ingrese su Contraseña" value="{{current_user.password}}">
+
+    <label class="radios" for="">Tipo: </label>
+    {% if current_user.is_authenticated %}
+    {%if current_user.is_admin() %}
+    <input class="radios" type="radio" name="tipo" value="Comprador">
+    <label class="radios" for="cliente">Cliente</label>
+    <input class="radios" type="radio" name="tipo" value="Vendedor">
+    <label class="radios" for="vendedor">Vendedor</label>
+    <input class="radios" type="radio" name="tipo" value="Administrador" checked>
+    <label class="radios" for="administrador">Administrador</label>
+    {% endif %}
+    {% if current_user.is_comprador() %}
+    <input class="radios" type="radio" name="tipo" value="Comprador" checked>
+    <label class="radios" for="cliente">Comprador</label>
+    {% endif %}
+    {% if current_user.is_vendedor() %}
+    <input class="radios" type="radio" name="tipo" value="Vendedor">
+    <label class="radios" for="vendedor">Vendedor</label>
+    {% endif %}
+    {% endif %}
+    <br>
+    <div class="radios">
+      <label>Genero:</label>
+      {% if current_user.genero=='F' %}
+      <label class="radio-inline"><input type="radio" name="genero" value="F" checked>Femenino</label>
+      <label class="radio-inline"><input type="radio" name="genero" value="M">Masculino</label>
+      {% else %}
+      <label class="radio-inline"><input type="radio" name="genero" value="F">Femenino</label>
+      <label class="radio-inline"><input type="radio" name="genero" value="M" checked>Masculino</label>
+      {% endif %}
+  </div>
+    <a href="/Usuarios/agregar"><input class="buttons" type="submit" value="Registrar"></a> 
+  </form>
+
+</body>
+</html>
+
+{% endblock %}

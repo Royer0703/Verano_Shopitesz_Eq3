@@ -54,7 +54,7 @@ def agregarUsuario():
     usuario.email=request.form['email']
     usuario.genero=request.form['genero']
     usuario.password=request.form['password']
-    usuario.tipo=request.values.get("tipo","Administrador")
+    usuario.tipo=request.values.get("tipo","Comprador")
     usuario.estatus='Activo'
     usuario.agregar()
        # flash('¡ Usuario registrado con exito')

@@ -47,8 +47,22 @@ body{
     font-size: 16px;
     margin-left: 50%;
     transform: translateX(-50%);
+    text-align: right;
   }
 
   .buttons:hover{
     background-color: black;
+}
+
+#btn{
+  width: 50%;
+  background: #1f53c5;
+  border: none;
+  padding: 12px;
+  color: white;
+  margin: 6px 0;
+  font-size: 16px;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  text-align: right;
 }
