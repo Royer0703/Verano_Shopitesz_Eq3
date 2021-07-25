@@ -1,0 +1,47 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/styleCrearCategoria.css')}}">
+{{super()}}
+<div>
+    <h1 class="bg-primary text-center">Listado de tarjetas</h1>
+
+    <a href="/Categorias/nueva" class="btn btn-success">
+         <span class="glyphicon glyphicon-plus-sign"></span>
+        Agregar Categoria
+    </a>
+
+    <table class="table table-bordered">
+        <th>IDTARJETA</th>
+        <th>IDUSUARIO</th>
+        <th>NOTARJETA</th>
+        <th>SALDO</th>
+        <th>BANCO</th>
+        {% if current_user.is_authenticated and current_user.is_admin() %}
+         <th>ESTATUS</th>
+        {% endif %}
+        <th>Ver</th>
+
+        {% for cat in categorias %}
+            <tr>
+                <td>{{cat.idCategoria}}</td>
+                <td>{{cat.nombre}}</td>
+                {% if current_user.is_authenticated and current_user.is_admin() %}
+                    <td>{{cat.estatus}}</td>
+                {% endif %}
+                <td><img src="/Categorias/consultarImagen/{{cat.idCategoria}}" width="100px" height="80px"></td>
+
+                    <td>
+                        <a href="/Categorias/{{cat.idCategoria}}">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </a>
+                    </td>
+
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

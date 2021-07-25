@@ -1,7 +1,7 @@
 {% extends 'comunes/base.html' %}
 {% block contenido %}
     {{super()}}
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -19,23 +19,23 @@
     <input class="controls" type="email" name="email" id="correo" placeholder="Ingrese su Correo" value="{{current_user.email}}" readonly>
     <input class="controls" type="password" name="password" id="pass" placeholder="Ingrese su Contraseña" value="{{current_user.password}}">
 
-    <label class="radios" for="">Tipo: </label>
+    <label class="radios">Tipo: </label>
     {% if current_user.is_authenticated %}
     {%if current_user.is_admin() %}
     <input class="radios" type="radio" name="tipo" value="Comprador">
-    <label class="radios" for="cliente">Cliente</label>
+    <label class="radios">Cliente</label>
     <input class="radios" type="radio" name="tipo" value="Vendedor">
-    <label class="radios" for="vendedor">Vendedor</label>
+    <label class="radios">Vendedor</label>
     <input class="radios" type="radio" name="tipo" value="Administrador" checked>
-    <label class="radios" for="administrador">Administrador</label>
+    <label class="radios">Administrador</label>
     {% endif %}
     {% if current_user.is_comprador() %}
     <input class="radios" type="radio" name="tipo" value="Comprador" checked>
-    <label class="radios" for="cliente">Comprador</label>
+    <label class="radios">Comprador</label>
     {% endif %}
     {% if current_user.is_vendedor() %}
     <input class="radios" type="radio" name="tipo" value="Vendedor">
-    <label class="radios" for="vendedor">Vendedor</label>
+    <label class="radios">Vendedor</label>
     {% endif %}
     {% endif %}
     <br>

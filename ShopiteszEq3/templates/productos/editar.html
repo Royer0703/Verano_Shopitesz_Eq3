@@ -1,0 +1,84 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/styleCrearProducto.css')}}">
+    <title>Editar Productos</title>
+</head>
+
+<body>
+    <form class="form-productos" action="/productos/editar" method="post" enctype="multipart/form-data">
+        <h4>Editar Productos</h4>
+        <label for="categoria">Categoria</label>
+        <input class="controls" type="number" name="categoria" value="{{producto.idCategoria}}">
+        <br>
+        <label>Nombre del producto</label>
+        <input class="controls" type="text" name="nombre" id="nombre" value="{{producto.nombre}}">
+        <label>Descripción</label>
+        <input class="controls" type="text" name="descripcion" id="descripcion" value="{{producto.descripcion}}">
+        <label>Precio</label>
+        <input class="controls" type="number" name="precio" id="precio" value="{{producto.precioVenta}}">
+        <label>Existencia</label>
+        <input class="controls" type="number" name="existencia" id="existencia" value="{{producto.existencia}}">
+        <label>Seleciona un archivo de las especificaciones:</label>
+        <input class="controls" type="file" id="file" accept="application/pdf">
+        <label>Seleciona una imagen:</label>
+        <input class="controls" type="file" id="file" accept="image/*">
+        <div class="controls">
+            <label for="estatus">Estatus:</label>
+            {% if producto.estatus=='Activo' %}
+            <input type="checkbox" name="estatus" value="Activa" checked>
+            {% else %}
+            <input type="checkbox" name="estatus" value="Inactiva">
+            {% endif %}
+        </div>
+        <br>
+        <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-floppy-disk"></span>
+            Guardar
+        </button>
+
+        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#borrar">
+            <span class="glyphicon glyphicon-trash"></span>
+            Eliminar
+        </a>
+        <a href="/productos" class="btn btn-info">
+            <span class="glyphicon glyphicon-arrow-left"></span>
+            Cancelar
+        </a>
+    </form>
+     <!-- Modal para ver el cuadro de dialogo de eliminar-->
+ <div id="borrar" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+  
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Eliminación de Productos</h4>
+        </div>
+        <div class="modal-body">
+          <p>¿ Estas seguro de eliminar el producto:<b>{{producto.nombre}} ?</b> </p>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-primary" href="/productos/eliminar/{{producto.idProducto}}">Aceptar</a>
+            <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  </div>
+</body>
+
+</html>
+{% endblock %}

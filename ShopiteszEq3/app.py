@@ -88,10 +88,67 @@ def consultarUsuario():
     return render_template('usuarios/editar.html')
 #fin del manejo de usuarios
 
+#PRODUCTOS-------------------------------------
 @app.route("/productos")
 def consultarProductos():
     producto=Producto()
     return render_template("productos/consultaGeneral.html",productos=producto.consultaGeneral())
+@app.route('/productos/<int:id>')
+@login_required
+def consultarProducto(id):
+    if current_user.is_authenticated and current_user.is_admin():
+        producto=Producto()
+        return render_template('productos/editar.html',producto=producto.consultaIndividuall(id))
+    else:
+        return redirect(url_for('mostrar_login'))
+@app.route('/productos/agregar',methods=['post'])
+def agregarProductos():
+    #try:
+    producto=Producto()
+    producto.idCategoria=request.form['categoria']
+    producto.nombre=request.form['nombre']
+    producto.descripcion=request.form['descripcion']
+    producto.precioVenta=request.form['precio']
+    producto.existencia=request.form['existencia']
+    producto.foto=request.files['imagen'].stream.read()
+    producto.especificaciones=request.files['archivo'].stream.read()
+    producto.estatus='Activo'
+    producto.agregar()
+       # flash('¡ Usuario registrado con exito')
+    #except:
+       # flash('¡ Error al agregar al usuario !')
+    return redirect(url_for('consultarProductos'))
+
+@app.route('/productos/editar',methods=['POST'])
+@login_required
+def editarProducto():
+    if current_user.is_authenticated and current_user.is_admin():
+
+        producto = Producto()
+        producto.idCategoria = request.form['categoria']
+        producto.nombre = request.form['nombre']
+        producto.descripcion = request.form['descripcion']
+        producto.precioVenta = request.form['precio']
+        producto.existencia = request.form['existencia']
+        producto.foto = ''
+        producto.especificaciones = ''
+        producto.estatus = request.values.get("estatus","Inactiva")
+        producto.editar()
+        return redirect(url_for('consultarProductos'))
+
+@app.route('/productos/eliminar/<int:id>')
+@login_required
+def eliminarProducto(id):
+    if current_user.is_authenticated and current_user.is_admin():
+        try:
+            producto=Producto()
+            producto.eliminacionLogica(id)
+            flash('Producto eliminada con exito')
+        except:
+            flash('Error al eliminar la categoria')
+        return redirect(url_for('consultarProductos'))
+    else:
+        return redirect(url_for('mostrar_login'))
 
 @app.route("/productos/nuevo")
 def agregarProducto():
@@ -160,42 +217,6 @@ def agregarCategoria():
     except:
         abort(500)
 
-#Envios
-@app.route('/envios/nuevo')
-def agregarenvio():
-    return render_template('/Envios/envios.html')
-
-@app.route('/envios/agregar',methods=['post'])
-def agregarEnvio():
-    try:
-        if current_user.is_authenticated:
-            if current_user.is_admin():
-                try:
-                    envio = Envio()
-                    envio.IDPEDIDO = request.form['idpedido']
-                    envio.IDPAQUETERIA = request.form['idpaqueteria']
-                    envio.FECHAENVIO = request.form['fechaenvio']
-                    envio.FECHAENTREGA = request.form['fechaentrega']
-                    envio.NOGUIA = request.form['numeroguia']
-                    envio.PESOPAQUETE = request.form['pesopaquete']
-                    envio.PRECIOGR = request.form['precio']
-                    envio.TOTALAPAGAR = request.form['total']
-                    envio.ESTATUS = request.form['estatus']
-                    envio.agregar()
-                    flash('¡ Envio agregada con exito !')
-                except:
-                    flash('¡ Error al agregar el envio !')
-                return render_template('index.html')
-            else:
-                abort(404)
-
-        else:
-            return render_template('index.html')
-    except:
-        abort(500)
-
-
-
 @app.route('/Categorias/<int:id>')
 @login_required
 def consultarCategoria(id):
@@ -243,6 +264,43 @@ def eliminarCategoria(id):
         return redirect(url_for('mostrar_login'))
 
 #Fin del crud de categorias
+
+#Envios
+@app.route('/envios/nuevo')
+def agregarenvio():
+    return render_template('/Envios/envios.html')
+
+@app.route('/envios/agregar',methods=['post'])
+def agregarEnvio():
+    try:
+        if current_user.is_authenticated:
+            if current_user.is_admin():
+                try:
+                    envio = Envio()
+                    envio.IDPEDIDO = request.form['idpedido']
+                    envio.IDPAQUETERIA = request.form['idpaqueteria']
+                    envio.FECHAENVIO = request.form['fechaenvio']
+                    envio.FECHAENTREGA = request.form['fechaentrega']
+                    envio.NOGUIA = request.form['numeroguia']
+                    envio.PESOPAQUETE = request.form['pesopaquete']
+                    envio.PRECIOGR = request.form['precio']
+                    envio.TOTALAPAGAR = request.form['total']
+                    envio.ESTATUS = request.form['estatus']
+                    envio.agregar()
+                    flash('¡ Envio agregada con exito !')
+                except:
+                    flash('¡ Error al agregar el envio !')
+                return render_template('index.html')
+            else:
+                abort(404)
+
+        else:
+            return render_template('index.html')
+    except:
+        abort(500)
+
+
+
 # manejo de pedidos
 @app.route('/Pedidos')
 @login_required

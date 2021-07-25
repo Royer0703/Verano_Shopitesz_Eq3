@@ -7,6 +7,10 @@
 <link rel="stylesheet" href="{{url_for('static',filename='css/styleCrearCategoria.css')}}">
     <h1>LISTADO DE PRODUCTOS</h1>
     <div class="table-responsive">
+        <a href="/productos/nuevo" class="btn btn-success">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+           Agregar Producto
+       </a>
     <table class="table table-bordered">
         <thead>
             <th>NOMBRE</th>
@@ -14,14 +18,22 @@
             <th>CATEGORIA</th>
             <th>PRECIO</th>
             <th>STOCK</th>
+            <th>VER</th>
         </thead>
-        {% for prod in productos %}
+        {% for producto in productos %}
             <tr>
-                <td>{{prod.nombre}}</td>
-                <td>{{prod.descripcion}}</td>
-                <td>{{prod.categoria.nombre}}</td>
-                <td>{{prod.precioVenta}}</td>
-                <td>{{prod.existencia}}</td>
+                <td>{{producto.nombre}}</td>
+                <td>{{producto.descripcion}}</td>
+                <td>{{producto.categoria.nombre}}</td>
+                <td>{{producto.precioVenta}}</td>
+                <td>{{producto.existencia}}</td>
+                {% if current_user.is_authenticated and current_user.is_admin() %}
+                <td>
+                    <a href="/productos/{{producto.idProducto}}">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                    </a>
+                </td>
+            {% endif %}
             </tr>
         {% endfor %}
     </table>

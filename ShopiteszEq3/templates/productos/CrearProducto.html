@@ -8,15 +8,10 @@
     <title>Registrar Productos</title>
 </head>
 <body>
-    <section class="form-productos">
+    <form class="form-productos" action="/productos/agregar" method="post" enctype="multipart/form-data">
         <h4>Registrar Productos</h4>
         <label for="categoria">Categoria</label>
-        <select class="seleccion" name="categoria" id="">
-            <option value="Elije">Elije la categoria</option>
-            <option value="Telefonía,">Telefonía</option>
-            <option value="Equipo de Computo,">Equipo de Computo</option>
-            <option value="Videojuegos,">Videojuegos</option>
-        </select>
+        <input class="controls" type="number" name="categoria" placeholder="Ingrese el id categoria">
         <br>
         <label>Nombre del producto</label>
         <input class="controls" type="text" name="nombre" id="nombre" placeholder="Ingresa el nombre de la categoria">
@@ -27,17 +22,12 @@
         <label>Existencia</label>
         <input class="controls" type="number" name="existencia" id="existencia" placeholder="Ingresa su existencia">
         <label>Seleciona un archivo de las especificaciones:</label>
-        <input class="controls" type="file" id="file" accept="application/pdf">
+        <input class="controls" type="file" id="file" accept="application/pdf" name="archivo">
         <label>Seleciona una imagen:</label>
-        <input class="controls" type="file" id="file" accept="image/*">
-        <label for="">Estatus</label>
-        <input class="radios" type="radio" id="Activo" name="estatus" value="Activo" checked>
-        <label class="radios" for="Activo">Activo</label>
-        <input class="radios" type="radio" id="Inactivo" name="estatus" value="Activo">
-        <label class="radios" for="Activo">Inactivo</label>
+        <input class="controls" type="file" id="file" accept="image/*" name="imagen">
         <br>
-        <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Guardar"></a>
-        <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Cancelar"></a>
-    </section>
+        <a href="/productos/agregar"><input class="buttons" type="submit" value="Guardar"></a>
+        <a href="/productos"><input class="buttons" type="button" value="Cancelar"></a>
+    </form>
 </body>
 </html>
