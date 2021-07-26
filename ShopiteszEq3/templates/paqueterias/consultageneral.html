@@ -5,30 +5,28 @@
 {% endblock %}
 {% block contenido %}
 <link rel="stylesheet" href="{{url_for('static',filename='css/styleCrearCategoria.css')}}">
-    <h1>LISTADO DE PRODUCTOS</h1>
+    <h1>LISTADO DE PAQUETERIAS</h1>
     <div class="table-responsive">
         <a href="/productos/nuevo" class="btn btn-success">
             <span class="glyphicon glyphicon-plus-sign"></span>
-           Agregar Producto
+           Agregar Paqueteria
        </a>
     <table class="table table-bordered">
         <thead>
             <th>NOMBRE</th>
-            <th>DESCRIPCION</th>
-            <th>CATEGORIA</th>
-            <th>PRECIO</th>
-            <th>STOCK</th>
+            <th>PAGINAWEB</th>
+            <th>PRECIOGR</th>
+            <th>TELEFONO</th>
             <th>ESTATUS</th>
             <th>VER</th>
         </thead>
-        {% for producto in productos %}
+        {% for Paqueteria in Paqueterias %}
             <tr>
-                <td>{{producto.nombre}}</td>
-                <td>{{producto.descripcion}}</td>
-                <td>{{producto.categoria.nombre}}</td>
-                <td>{{producto.precioVenta}}</td>
-                <td>{{producto.existencia}}</td>
-                <td>{{producto.estatus}}</td>
+                <td>{{Paqueteria.NOMBRE}}</td>
+                <td>{{Paqueteria.PAGINAWEB}}</td>
+                <td>{{Paqueteria.PRECIOGR}}</td>
+                <td>{{Paqueteria.TELEFONO}}</td>
+                <td>{{Paqueteria.ESTATUS}}</td>
                 {% if current_user.is_authenticated and current_user.is_admin() %}
                 <td>
                     <a href="/productos/{{producto.idProducto}}">

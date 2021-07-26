@@ -143,7 +143,7 @@ class Usuario(UserMixin,db.Model):
 
 
 #ENVIOS
-class Envio(UserMixin,db.Model):
+class Envios(UserMixin,db.Model):
     __tablename__='ENVIOS'
     IDENVIO=Column(Integer,primary_key=True)
     IDPEDIDO=Column(Integer,ForeignKey('Pedidos.idPedido'))
@@ -155,11 +155,104 @@ class Envio(UserMixin,db.Model):
     PRECIOGR=Column(Integer,nullable=False)
     TOTALPAGAR=Column(Integer,nullable=False)
     ESTATUS=Column(String,nullable=False)
+    paqueteria = relationship('Paqueterias', backref='ENVIOS', lazy='select')
+    pedidos = relationship('Pedidos', backref='ENVIOS', lazy='select')
 
-    #Método para agregar un envio
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividuall(self,id):
+        return Envios.query.get(id)
+
     def agregar(self):
         db.session.add(self)
         db.session.commit()
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self,id):
+        envios=self.consultaIndividuall(id)
+        db.session.delete(envios)
+        db.session.commit()
+
+    def eliminacionLogica(self,id):
+        envios = self.consultaIndividuall(id)
+        envios.estatus='Inactiva'
+        envios.editar()
+
+#PAQUETERIAS
+class Paqueterias(UserMixin,db.Model):
+    __tablename__='PAQUETERIAS'
+    IDPAQUETERIA=Column(Integer,primary_key=True)
+    NOMBRE=Column(String,nullable=False)
+    PAGINAWEB=Column(String,nullable=True)
+    PRECIOGR=Column(Integer,nullable=False)
+    TELEFONO=Column(String,nullable=False)
+    ESTATUS=Column(String,nullable=False)
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividuall(self,id):
+        return Paqueterias.query.get(id)
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self,id):
+        paqueterias=self.consultaIndividuall(id)
+        db.session.delete(paqueterias)
+        db.session.commit()
+
+    def eliminacionLogica(self,id):
+        paqueterias = self.consultaIndividuall(id)
+        paqueterias.estatus='Inactiva'
+        paqueterias.editar()
+
+#PAQUETERIAS
+class Pedidos(UserMixin,db.Model):
+    __tablename__='Pedidos'
+    idPedido=Column(Integer,primary_key=True)
+    idComprador=Column(Integer,nullable=False)
+    idVendedor=Column(Integer,nullable=False)
+    idTarjeta=Column(Integer,nullable=False)
+    fechaRegistro=Column(String,nullable=False)
+    fechaAtencion=Column(String,nullable=True)
+    fechaRecepcion=Column(String,nullable=False)
+    fechaCierre=Column(String,nullable=False)
+    total=Column(Integer,nullable=False)
+    estatus=Column(String,nullable=False)
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividuall(self,id):
+        return Pedidos.query.get(id)
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self,id):
+        pedidos=self.consultaIndividuall(id)
+        db.session.delete(pedidos)
+        db.session.commit()
+
+    def eliminacionLogica(self,id):
+        pedidos = self.consultaIndividuall(id)
+        pedidos.estatus='Inactiva'
+        pedidos.editar()
 
 
 #TARJETAS---------------------
@@ -197,3 +290,4 @@ class Tarjetas(db.Model):
         cat = self.consultaIndividuall(id)
         cat.estatus='Inactiva'
         cat.editar()
+

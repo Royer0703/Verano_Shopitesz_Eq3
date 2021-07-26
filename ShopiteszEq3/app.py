@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from flask import Flask,render_template,request,redirect,url_for,flash,session,abort
 from flask_bootstrap import Bootstrap
-from modelo.Dao import db,Categoria,Producto,Usuario,Envio
+from modelo.Dao import db, Categoria, Producto, Usuario, Envios, Paqueterias
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
 app = Flask(__name__)
 Bootstrap(app)
@@ -265,40 +265,49 @@ def eliminarCategoria(id):
 
 #Fin del crud de categorias
 
+
 #Envios
+@app.route('/envios')
+def consultaEnvios():
+    envio=Envios()
+    return render_template('Envios/consultageneral.html', envios=envio.consultaGeneral())
+
 @app.route('/envios/nuevo')
 def agregarenvio():
-    return render_template('/Envios/envios.html')
+    return render_template('/Envios/agregar.html')
 
 @app.route('/envios/agregar',methods=['post'])
 def agregarEnvio():
-    try:
-        if current_user.is_authenticated:
-            if current_user.is_admin():
-                try:
-                    envio = Envio()
-                    envio.IDPEDIDO = request.form['idpedido']
-                    envio.IDPAQUETERIA = request.form['idpaqueteria']
-                    envio.FECHAENVIO = request.form['fechaenvio']
-                    envio.FECHAENTREGA = request.form['fechaentrega']
-                    envio.NOGUIA = request.form['numeroguia']
-                    envio.PESOPAQUETE = request.form['pesopaquete']
-                    envio.PRECIOGR = request.form['precio']
-                    envio.TOTALAPAGAR = request.form['total']
-                    envio.ESTATUS = request.form['estatus']
-                    envio.agregar()
-                    flash('¡ Envio agregada con exito !')
-                except:
-                    flash('¡ Error al agregar el envio !')
-                return render_template('index.html')
-            else:
-                abort(404)
 
-        else:
-            return render_template('index.html')
-    except:
-        abort(500)
+    envio = Envios()
+    envio.IDPEDIDO = request.form['idpedido']
+    envio.IDPAQUETERIA = request.form['idpaqueteria']
+    envio.FECHAENVIO = request.form['fechaenvio']
+    envio.FECHAENTREGA = request.form['fechaentrega']
+    envio.NOGUIA = request.form['numeroguia']
+    envio.PESOPAQUETE = request.form['pesopaquete']
+    envio.PRECIOGR = request.form['precio']
+    envio.TOTALAPAGAR = request.form['total']
+    envio.ESTATUS = 'Activa'
+    envio.agregar()
+    return redirect(url_for('consultaEnvios'))
 
+@app.route('/envios/<int:id>')
+@login_required
+def consultarEnvios(id):
+    if current_user.is_authenticated and current_user.is_admin():
+        envios=Envios()
+        return render_template('Envios/editar.html',env=envios.consultaIndividuall(id))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+
+
+#PAQUETERIAS
+@app.route('/paqueterias')
+def consultaPaqueterias():
+    paqueterias=Paqueterias()
+    return render_template('paqueterias/consultageneral.html', paqueteria=paqueterias.consultaGeneral())
 
 
 # manejo de pedidos

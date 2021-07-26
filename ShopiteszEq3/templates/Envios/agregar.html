@@ -22,11 +22,7 @@
         <label>Id Pedido</label>
         <input class="controls" type="number" name="idpedido" placeholder="">
         <label for="">Paqueteria</label>
-        <select class="radios" name="estatus">
-            <option value="Natacion">DHL</option>
-            <option value="Carreras">ESTAFETA</option>
-            <option value="Salto">FEDEX</option>
-        </select>
+        <input class="controls" type="number" name="idpaqueteria" placeholder="">
         <br>
         <label>Fecha Envio</label>
         <input class="controls" type="date" name="fechaenvio" placeholder="">
@@ -40,15 +36,9 @@
         <input class="controls" type="number" name="precio" placeholder="">
         <label>Total</label>
         <input class="controls" type="number" name="total" placeholder="">
-        <label for="">Estatus</label>
-        <select class="radios" name="estatus">
-            <option value="Natacion">Pendiente</option>
-            <option value="Carreras">Transito</option>
-            <option value="Salto">Entregado</option>
-        </select>
         <br>
-        <a href="/"><input class="buttons" type="submit" value="Guardar"></a>
-        <a href="/"><input class="buttons" type="submit" value="Cancelar"></a>
+        <a href="/envios/agregar"><input class="buttons" type="submit" value="Guardar"></a>
+        <a href="/"><input class="buttons" type="button" value="Cancelar"></a>
     </form>
 </body>
 

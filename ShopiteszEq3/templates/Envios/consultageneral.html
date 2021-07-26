@@ -1,0 +1,48 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/styleCrearCategoria.css')}}">
+{{super()}}
+<div>
+    <h1 class="bg-primary text-center">Listado de Envios</h1>
+
+    <a href="/envios/nuevo" class="btn btn-success">
+         <span class="glyphicon glyphicon-plus-sign"></span>
+        Agregar Envio
+    </a>
+
+    <table class="table table-bordered">
+        <th>ID</th>
+        <th>FECHAENVIO</th>
+        <th>FECHAENTREGA</th>
+        <th>NOGUIA</th>
+        <th>TOTALPAGAR</th>
+        {% if current_user.is_authenticated and current_user.is_admin() %}
+         <th>ESTATUS</th>
+        {% endif %}
+        <th>Ver</th>
+
+        {% for envios in Envios %}
+            <tr>
+                <td>{{envios.IDENVIO}}</td>
+                <td>{{envios.FECHAENVIO}}</td>
+                <td>{{envios.FECHAENTREGA}}</td>
+                <td>{{envios.NOGUIA}}</td>
+                <td>{{envios.TOTALPAGAR}}</td>
+                {% if current_user.is_authenticated and current_user.is_admin() %}
+                    <td>{{envios.ESTATUS}}</td>
+                {% endif %}
+                    <td>
+                        <a href="/envios/{{envios.IDENVIO}}">
+                            <span class="glyphicon glyphicon-eye-open"></span>
+                        </a>
+                    </td>
+
+            </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}
