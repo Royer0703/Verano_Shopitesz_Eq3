@@ -38,7 +38,7 @@ create table Usuarios(
     direccion varchar(200) not null,
     telefono char(12) not null,
     email varchar(100) not null,
-    password_hash varchar(20) not null,
+    password_hash varchar(128) not null,
     tipo varchar(15) not null,
     estatus varchar(10) not null,
     genero varchar(20) not null,

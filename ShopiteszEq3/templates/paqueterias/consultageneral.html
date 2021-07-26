@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="{{url_for('static',filename='css/styleCrearCategoria.css')}}">
     <h1>LISTADO DE PAQUETERIAS</h1>
     <div class="table-responsive">
-        <a href="/productos/nuevo" class="btn btn-success">
+        <a href="" class="btn btn-success">
             <span class="glyphicon glyphicon-plus-sign"></span>
            Agregar Paqueteria
        </a>
@@ -20,7 +20,7 @@
             <th>ESTATUS</th>
             <th>VER</th>
         </thead>
-        {% for Paqueteria in Paqueterias %}
+        {% for Paqueteria in paqueteria %}
             <tr>
                 <td>{{Paqueteria.NOMBRE}}</td>
                 <td>{{Paqueteria.PAGINAWEB}}</td>
@@ -29,7 +29,7 @@
                 <td>{{Paqueteria.ESTATUS}}</td>
                 {% if current_user.is_authenticated and current_user.is_admin() %}
                 <td>
-                    <a href="/productos/{{producto.idProducto}}">
+                    <a href="">
                         <span class="glyphicon glyphicon-eye-open"></span>
                     </a>
                 </td>

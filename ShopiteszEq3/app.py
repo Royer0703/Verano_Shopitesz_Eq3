@@ -130,8 +130,10 @@ def editarProducto():
         producto.descripcion = request.form['descripcion']
         producto.precioVenta = request.form['precio']
         producto.existencia = request.form['existencia']
-        producto.foto = ''
-        producto.especificaciones = ''
+        imagen = request.files['imagen'].stream.read()
+        if imagen:
+            producto.foto = imagen
+        #producto.especificaciones = ''
         producto.estatus = request.values.get("estatus","Inactiva")
         producto.editar()
         return redirect(url_for('consultarProductos'))
