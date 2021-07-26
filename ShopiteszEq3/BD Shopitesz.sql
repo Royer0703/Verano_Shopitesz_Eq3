@@ -109,16 +109,24 @@ create table DetallePedidos(
     foreign key(idPedido) references pedidos(idPedido),
     foreign key(idProducto) references productos(idProducto)
 );
-
+use shopitesz;
 drop table Categorias;
 insert into categorias(nombre,estatus) values('Equipo de computo','Activa');
+select * from Usuarios;
 select * from Categorias;
+select * from Productos;
+select * from ENVIOS;
+select * from pedidos;
+select * from paqueterias;
 
 /*crear usuarios*/
 create user user_shopitesz identified by 'Shopit3sz.123';
 
-drop table Usuarios;
-select * from Productos;
+drop table Categorias;
+
 
 grant select,insert,update,delete on shopitesz.categorias to user_shopitesz;
 grant select,insert,update,delete on shopitesz.Usuarios to user_shopitesz;
+grant select,insert,update,delete on shopitesz.Productos to user_shopitesz;
+grant select,insert,update,delete on shopitesz.paqueterias to user_shopitesz;
+grant select,insert,update,delete on shopitesz.envios to user_shopitesz;
