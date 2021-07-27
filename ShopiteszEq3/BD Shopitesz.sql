@@ -118,7 +118,7 @@ select * from Productos;
 select * from ENVIOS;
 select * from pedidos;
 select * from paqueterias;
-
+select * from tarjetas;
 /*crear usuarios*/
 create user user_shopitesz identified by 'Shopit3sz.123';
 
@@ -130,3 +130,4 @@ grant select,insert,update,delete on shopitesz.Usuarios to user_shopitesz;
 grant select,insert,update,delete on shopitesz.Productos to user_shopitesz;
 grant select,insert,update,delete on shopitesz.paqueterias to user_shopitesz;
 grant select,insert,update,delete on shopitesz.envios to user_shopitesz;
+grant select,insert,update,delete on shopitesz.tarjetas to user_shopitesz;
