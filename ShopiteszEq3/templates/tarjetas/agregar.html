@@ -1,58 +1,26 @@
-{% extends "layout.html" %}
-
-{% block titulo%}
-Alta Tarjetas
-{% endblock %}
-
-{% block content %}
-{{super()}}
-
-<div>
-    <div class=" d-flex justify-content-center py-4" style="height: 800px">
-        <div>
-            <div class="card text-white bg-success mb-3 text-center shadow-lg" style="max-width: rem; width: 500PX;">
-                <div class="card-header">
-                    <img src="../../static/img/tec.jpg" alt="" width="30" height="24"
-                        class="d-inline-block align-text-top">
-                    Agregar Tarjeta
-                </div>
-                <div class="card-body bg-light text-dark">
-                    <form action="/usuarios/AltaTarjeta" method="post" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label for="nombre">Usuario:</label>
-                            <input type="number" name="idUsuario" class="input" min="0" required>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label>Numero de tarjeta:</label>
-                            <input type="text" name="noTarjeta" class="input" required>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label>Saldo:</label>
-                            <input type="number" name="saldo" class="input" min="0" required>
-                        </div>
-                        <br>
-                        <div class="form-group">
-                            <label>Banco:</label>
-                            <input type="text" name="banco" class="input" required>
-                        </div>
-                        <div class="form-control">
-                            <label for="estatus">Estatus:</label><br>
-                            <input type="checkbox" name="estatus" value="A" checked>Activo
-                            <br>
-                            <input type="checkbox" name="estatus" value="I"> Inactivo
-                        </div>
-                        <br>
-                        <button type="submit" class="btn btn-primary">Registrar</button>
-                        <a href="/usuarios/Tarjetas" class="btn btn-danger">Cancelar</a>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-</div>
-<script src="../../static/js/bootstrap.min.js"></script>
-
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/styletarjeta.css')}}">
+    <title>Tarjetas</title>
+</head>
+<body>
+    <section class="form-tarjeta">
+        <h4>Tarjetas</h4>
+        <label>idUsuario</label>
+        <input class="controls" type="number" name="Id Usuario"  placeholder="">
+        <label>Numero de Tarjeta:</label>
+        <input class="controls" type="text" name="noTarjeta"  placeholder="">
+        <label>Saldo</label>
+        <input class="controls" type="number" name="saldo"  placeholder="">
+        <label>Banco</label>
+        <input class="controls" type="text" name="banco"  placeholder="">
+        <br>
+        <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Guardar"></a>
+        <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Cancelar"></a>
+    </section>
+</body>
+</html>
