@@ -322,6 +322,11 @@ def consultarPedidos():
 
 # fin del manejo de pedidos
 
+
+@app.route('/tarjetas/agregar')
+def agregaTarjeta():
+    return render_template('/tarjetas/agregar.html')
+
 #REDIRECCIONA A LA PAGINA PARA AGREGAR TARJETAS
 @app.route('/usuarios/AltaTarjeta',methods=['post'])
 def agregarTarjeta():

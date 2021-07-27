@@ -8,10 +8,10 @@
     <title>Tarjetas</title>
 </head>
 <body>
-    <section class="form-tarjeta">
+    <form class="form-tarjeta" action="/usuarios/AltaTarjeta" method="post" enctype="multipart/form-data">
         <h4>Tarjetas</h4>
         <label>idUsuario</label>
-        <input class="controls" type="number" name="Id Usuario"  placeholder="">
+        <input class="controls" type="number" name="IdUsuario"  placeholder="">
         <label>Numero de Tarjeta:</label>
         <input class="controls" type="text" name="noTarjeta"  placeholder="">
         <label>Saldo</label>
@@ -19,8 +19,8 @@
         <label>Banco</label>
         <input class="controls" type="text" name="banco"  placeholder="">
         <br>
-        <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Guardar"></a>
-        <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Cancelar"></a>
-    </section>
+        <a href="/usuarios/AltaTarjeta"><input class="buttons" type="submit" value="Guardar"></a>
+        <a href="/usuarios/Tarjetas"><input class="buttons" type="button" value="Cancelar"></a>
+    </form>
 </body>
 </html>
