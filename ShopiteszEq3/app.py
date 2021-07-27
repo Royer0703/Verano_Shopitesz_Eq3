@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from flask import Flask,render_template,request,redirect,url_for,flash,session,abort
 from flask_bootstrap import Bootstrap
-from modelo.Dao import db, Categoria, Producto, Usuario, Envios, Paqueterias
+from modelo.Dao import db, Categoria, Producto, Usuario, Envios, Paqueterias, Tarjetas
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
 app = Flask(__name__)
 Bootstrap(app)
@@ -342,7 +342,7 @@ def agregarTarjeta():
 @app.route('/usuarios/Tarjetas')
 def consultaTarjetas():
     tar=Tarjetas()
-    return render_template('Tarjetas/ConsultaTarjetas.html', Tarjetas = tar.consultaGeneral())
+    return render_template('tarjetas/consultageneral.html', Tarjetas = tar.consultaGeneral())
 
 #REDIRECCIONA A LA PAGINA PARA EDITAR TARJETAS
 @app.route('/usuarios/EditarTarjeta',methods=['POST'])
@@ -379,7 +379,7 @@ def eliminarTarjeta(id):
 def consultarTarjeta(id):
     tar = Tarjetas()
     ur = Usuario()
-    return render_template('Tarjetas/EditarTarjeta.html', tar = tar.consultaIndividuall(id))
+    return render_template('tarjetas/editar.html', tar = tar.consultaIndividuall(id))
 
 #manejo de errores
 @app.errorhandler(404)

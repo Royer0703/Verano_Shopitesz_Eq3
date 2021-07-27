@@ -1,52 +1,46 @@
-{% extends "layout.html" %}
-
-{% block titulo%}
-Alta Tarjetas
-{% endblock %}
-
-{% block content %}
+{% extends 'comunes/base.html' %}
+{% block navbar %}
 {{super()}}
-
-<div>
-    <div class=" d-flex justify-content-center py-4" style="height: 800px">
-        <div >
-            <div class="card text-white bg-success mb-3 text-center shadow-lg" style="max-width: rem; width: 1800PX;">
-                <div class="card-header"> 
-                    <img src="../../static/img/tec.jpg" alt="" width="30" height="24" class="d-inline-block align-text-top">
-                    Listado de Tarjetas</div>
-                <div class="card-body bg-light text-dark">
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end py-4 px-4">
-                        <a href="{{url_for('nuevaTarjeta')}}" class="btn btn-success btn-lg" role="button">Agregar</a>
-                    </div>
-                    <table class="table table-light">
-                        <th>IDTARJETA</th>
-                        <th>IDTARJETA</th>
-                        <th>IDUSUARIO</th>
-                        <th>NoTARJETA</th>
-                        <th>SALDO</th>
-                        <th>BANCO</th>
-                        <th>ESTATUS</th>
-                        {% for tar in Tarjetas %}
-                            <tr>
-                                <td>{{tar.idTarjeta}}</td>
-                                <td>{{tar.idTarjeta}}</td>
-                                <td>{{tar.idUsuario}}</td>
-                                <td>{{tar.noTarjeta}}</td>
-                                <td>{{tar.saldo}}</td>
-                                <td>{{tar.banco}}</td>
-                                <td>{{tar.estatus}}</td>
-                                <td>
-                                    <a href="/Tarjetas/{{tar.idTarjeta}}" class="btn btn-warning btn-lg"  role="button">Editar
-                                    <span class="glyphicon glyphicon-eye-open"></span>                                   
-                                    </a>                                   
-                                </td>
-                            </tr>
-                        {% endfor %}
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+{% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/styleCrearCategoria.css')}}">
+<h1>LISTADO DE TARJETAS</h1>
+<div class="table-responsive">
+    <a href="" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        Agregar Tarjeta
+    </a>
+    <table class="table table-bordered">
+        <th>IDTARJETA</th>
+        <th>IDTARJETA</th>
+        <th>IDUSUARIO</th>
+        <th>NoTARJETA</th>
+        <th>SALDO</th>
+        <th>BANCO</th>
+        <th>ESTATUS</th>
+        <th>VER</th>
+        {% for tar in Tarjetas %}
+        <tr>
+            <td>{{tar.idTarjeta}}</td>
+            <td>{{tar.idTarjeta}}</td>
+            <td>{{tar.idUsuario}}</td>
+            <td>{{tar.noTarjeta}}</td>
+            <td>{{tar.saldo}}</td>
+            <td>{{tar.banco}}</td>
+            <td>{{tar.estatus}}</td>
+            <td>
+                <a href="/Tarjetas/{{tar.idTarjeta}}">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                </a>
+            </td>
+        </tr> 
+        {% endfor %}
+    </table>
+</div>
+</div>
+</div>
+</div>
 </div>
 
 {% endblock %}
