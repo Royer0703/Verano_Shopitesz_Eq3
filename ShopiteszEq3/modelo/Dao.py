@@ -88,6 +88,26 @@ class Usuario(UserMixin,db.Model):
     estatus=Column(String,nullable=False)
     genero=Column(String,nullable=False)
 
+    def consultaGeneral(self):
+        return self.query.all()
+    def consultaIndividuall(self,id):
+        return Usuario.query.get(id)
+
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self,id):
+        Usuario=self.consultaIndividuall(id)
+        db.session.delete(Usuario)
+        db.session.commit()
+
+    def eliminacionLogica(self,id):
+        Usuario = self.consultaIndividuall(id)
+        Usuario.estatus='Inactiva'
+        Usuario.editar()
+
     @property #Implementa el metodo Get (para acceder a un valor)
     def password(self):
         raise AttributeError('El password no tiene acceso de lectura')

@@ -1,0 +1,45 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/styleCrearCategoria.css')}}">
+    <h1>LISTADO DE USUARIOS</h1>
+    <div class="table-responsive">
+        <a href="/Usuarios/nuevo" class="btn btn-success">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+           Agregar Usuario
+       </a>
+    <table class="table table-bordered">
+        <thead>
+            <th>IDUSUARIO</th>
+            <th>NOMBRE</th>
+            <th>DIRECCION</th>
+            <th>TELEFONO</th>
+            <th>EMAIL</th>
+            <th>TIPO</th>
+            <th>ESTATUS</th>
+            <th>VER</th>
+        </thead>
+        {% for usuario in usuarios %}
+            <tr>
+                <td>{{usuario.idUsuario}}</td>
+                <td>{{usuario.nombreCompleto}}</td>
+                <td>{{usuario.direccion}}</td>
+                <td>{{usuario.telefono}}</td>
+                <td>{{usuario.email}}</td>
+                <td>{{usuario.tipo}}</td>
+                <td>{{usuario.estatus}}</td>
+                {% if current_user.is_authenticated and current_user.is_admin() %}
+                <td>
+                    <a href="/Usuarios/verPerfil">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                    </a>
+                </td>
+            {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+{% endblock %}

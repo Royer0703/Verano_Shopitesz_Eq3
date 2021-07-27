@@ -40,9 +40,13 @@ def cargar_usuario(id):
 @app.route('/Usuarios/nuevo')
 def nuevoUsuario():
     if current_user.is_authenticated and not current_user.is_admin():
-        return render_template('principal.html')
+        return render_template('/usuarios/CrearCuenta.html')
     else:
         return render_template('usuarios/CrearCuenta.html')
+@app.route("/usuaios")
+def consultarUsuarios():
+    usuario=Usuario()
+    return render_template("usuarios/consultageneral.html",usuarios=usuario.consultaGeneral())
 
 @app.route('/Usuarios/agregar',methods=['post'])
 def agregarUsuario():
@@ -60,7 +64,7 @@ def agregarUsuario():
        # flash('¡ Usuario registrado con exito')
     #except:
        # flash('¡ Error al agregar al usuario !')
-    return render_template('usuarios/CrearCuenta.html')
+    return redirect(url_for('consultarUsuarios'))
 
 
 @app.route("/Usuarios/validarSesion",methods=['POST'])
@@ -85,7 +89,7 @@ def cerrarSesion():
 @app.route('/Usuarios/verPerfil')
 @login_required
 def consultarUsuario():
-    return render_template('usuarios/editar.html')
+    return render_template('usuarios/editarmiperfil.html')
 #fin del manejo de usuarios
 
 #PRODUCTOS-------------------------------------
