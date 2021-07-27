@@ -67,14 +67,14 @@ class Producto(db.Model):
         db.session.commit()
 
     def eliminar(self,id):
-        cat=self.consultaIndividuall(id)
-        db.session.delete(cat)
+        Producto=self.consultaIndividuall(id)
+        db.session.delete(Producto)
         db.session.commit()
 
     def eliminacionLogica(self,id):
-        cat = self.consultaIndividuall(id)
-        cat.estatus='Inactiva'
-        cat.editar()
+        Producto = self.consultaIndividuall(id)
+        Producto.estatus='Inactiva'
+        Producto.editar()
 
 class Usuario(UserMixin,db.Model):
     __tablename__='Usuarios'

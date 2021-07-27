@@ -133,7 +133,9 @@ def editarProducto():
         imagen = request.files['imagen'].stream.read()
         if imagen:
             producto.foto = imagen
-        #producto.especificaciones = ''
+        archivo = request.files['archivo'].stream.read()
+        if archivo:
+            producto.especificaciones = archivo
         producto.estatus = request.values.get("estatus","Inactiva")
         producto.editar()
         return redirect(url_for('consultarProductos'))

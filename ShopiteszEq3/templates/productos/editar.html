@@ -30,15 +30,15 @@
         <label>Existencia</label>
         <input class="controls" type="number" name="existencia" id="existencia" value="{{producto.existencia}}">
         <label>Seleciona un archivo de las especificaciones:</label>
-        <input class="controls" type="file" id="file" accept="application/pdf">
+        <input class="controls" type="file" id="file" name="archivo" accept="application/pdf">
         <label>Seleciona una imagen:</label>
         <input class="controls" type="file" id="file" name="imagen" accept="image/*">
         <div class="controls">
             <label for="estatus">Estatus:</label>
-            {% if producto.estatus=='Activo' %}
+            {% if producto.estatus=='Activa' %}
             <input type="checkbox" name="estatus" value="Activa" checked>
             {% else %}
-            <input type="checkbox" name="estatus" value="Inactiva">
+            <input type="checkbox" name="estatus" value="Activa">
             {% endif %}
         </div>
         <br>
