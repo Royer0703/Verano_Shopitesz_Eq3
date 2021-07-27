@@ -331,7 +331,7 @@ def agregarTarjeta():
         tar.noTarjeta = request.form['noTarjeta']
         tar.saldo = request.form['saldo']
         tar.banco = request.form['banco']
-        tar.estatus = 'A'
+        tar.estatus = 'Activa'
         tar.agregar()
         flash('¡ Tarjeta agregada con exito !')
     except:
