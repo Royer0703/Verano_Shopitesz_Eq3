@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/styleCrearCategoria.css')}}">
+    <title>Categorias</title>
+</head>
+
+<body>
+    <form class="form-categorias" action="/paqueterias/agregar" method="post" enctype="multipart/form-data">
+        <h4>Registrar Categorias</h4>
+        <label>Nombre de la Paqueteria</label>
+        <input class="controls" type="text" name="nombre" id="nombre" placeholder="Ingresa el nombre de la categoria">
+        <label>Pagina Web</label>
+        <input class="controls" type="text"  name="paginaweb" placeholder="Ingresa la url de lapagina web">
+        <label>PrecioGR</label>
+        <input class="controls" type="number" name="preciogr" placeholder="Ingresa el precio">
+        <label>Telefono</label>
+        <input class="controls" type="text"  name="telefono" placeholder="Ingresa un numero de telefono">
+        <br>
+        <a href="/paqueterias/agregar"><input class="buttons" type="submit" value="Guardar"></a>
+        <a href="/paqueterias"><input class="buttons" type="button" value="Cancelar"></a>
+    </form>
+</body>
+
+</html>

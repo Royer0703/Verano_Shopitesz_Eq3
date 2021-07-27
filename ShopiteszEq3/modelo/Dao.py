@@ -207,16 +207,16 @@ class Paqueterias(UserMixin,db.Model):
         db.session.commit()
 
     def eliminar(self,id):
-        paqueterias=self.consultaIndividuall(id)
-        db.session.delete(paqueterias)
+        paqueteria=self.consultaIndividuall(id)
+        db.session.delete(paqueteria)
         db.session.commit()
 
     def eliminacionLogica(self,id):
-        paqueterias = self.consultaIndividuall(id)
-        paqueterias.estatus='Inactiva'
-        paqueterias.editar()
+        paqueteria = self.consultaIndividuall(id)
+        paqueteria.estatus='Inactiva'
+        paqueteria.editar()
 
-#PAQUETERIAS
+#PEDIDOS
 class Pedidos(UserMixin,db.Model):
     __tablename__='Pedidos'
     idPedido=Column(Integer,primary_key=True)

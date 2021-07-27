@@ -18,6 +18,9 @@
 <body>
     <form class="form-productos" action="/productos/editar" method="post" enctype="multipart/form-data">
         <h4>Editar Productos</h4>
+        <label for="categoria">IdProducto</label>
+        <input class="controls" type="number" name="id" value="{{producto.idProducto}}">
+        <br>
         <label for="categoria">Categoria</label>
         <input class="controls" type="number" name="categoria" value="{{producto.idCategoria}}">
         <br>

@@ -125,6 +125,7 @@ def editarProducto():
     if current_user.is_authenticated and current_user.is_admin():
 
         producto = Producto()
+        producto.idProducto = request.form['id']
         producto.idCategoria = request.form['categoria']
         producto.nombre = request.form['nombre']
         producto.descripcion = request.form['descripcion']
@@ -310,8 +311,72 @@ def consultarEnvios(id):
 #PAQUETERIAS
 @app.route('/paqueterias')
 def consultaPaqueterias():
-    paqueterias=Paqueterias()
-    return render_template('paqueterias/consultageneral.html', paqueteria=paqueterias.consultaGeneral())
+    paqueteria=Paqueterias()
+    return render_template('paqueterias/consultageneral.html', paqueteria=paqueteria.consultaGeneral())
+
+@app.route('/paqueterias/nuevo')
+def nuevapqueteria():
+    return render_template('/paqueterias/agregar.html')
+
+@app.route('/paqueterias/edit')
+def editpqueteria():
+    return render_template('/paqueterias/editar.html')
+
+@app.route('/paqueterias/agregar',methods=['post'])
+def agregarPaqueteria():
+
+    paqueteria = Paqueterias()
+    paqueteria.NOMBRE = request.form['nombre']
+    paqueteria.PAGINAWEB = request.form['paginaweb']
+    paqueteria.PRECIOGR = request.form['preciogr']
+    paqueteria.TELEFONO = request.form['telefono']
+    paqueteria.ESTATUS = 'Activa'
+    paqueteria.agregar()
+    return redirect(url_for('consultaPaqueterias'))
+
+@app.route('/paqueterias/editar',methods=['POST'])
+@login_required
+def editarPaqueterias():
+    if current_user.is_authenticated and current_user.is_admin():
+        try:
+            paqueteria=Paqueterias()
+            paqueteria.IDPAQUETERIA=request.form['id']
+            paqueteria.NOMBRE=request.form['nombre']
+            paqueteria.PAGINAWEB=request.form['paginaweb']
+            paqueteria.PRECIOGR=request.form['preciogr']
+            paqueteria.TELEFONO=request.form['telefono']
+            paqueteria.ESTATUS=request.values.get("estatus","Inactiva")
+            paqueteria.editar()
+            flash('¡ Paqueteria editada con exito !')
+        except:
+            flash('¡ Error al editar la paqueteria !')
+
+        return redirect(url_for('consultaPaqueterias'))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+@app.route('/paqueterias/<int:id>')
+@login_required
+def consultarpaqueterias(id):
+    if current_user.is_authenticated and current_user.is_admin():
+        paqueteria=Paqueterias()
+        return render_template('paqueteriaS/editar.html',paqueteria=paqueteria.consultaIndividuall(id))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+@app.route('/paqueterias/eliminar/<int:id>')
+@login_required
+def eliminarPaqueteria(id):
+    if current_user.is_authenticated and current_user.is_admin():
+        #try:
+        paqueteria=Paqueterias()
+        paqueteria.eliminacionLogica(id)
+            #flash('Paqueteria eliminada con exito')
+        #except:
+            #flash('Error al eliminar la paqueteria')
+        return redirect(url_for('consultaPaqueterias'))
+    else:
+        return redirect(url_for('mostrar_login'))
 
 
 # manejo de pedidos
@@ -330,17 +395,17 @@ def agregaTarjeta():
 #REDIRECCIONA A LA PAGINA PARA AGREGAR TARJETAS
 @app.route('/usuarios/AltaTarjeta',methods=['post'])
 def agregarTarjeta():
-    try:
-        tar=Tarjetas()
-        tar.idUsuario = request.form['idUsuario']
-        tar.noTarjeta = request.form['noTarjeta']
-        tar.saldo = request.form['saldo']
-        tar.banco = request.form['banco']
-        tar.estatus = 'Activa'
-        tar.agregar()
-        flash('¡ Tarjeta agregada con exito !')
-    except:
-        flash('¡ Error al agregar la Tarjeta !')
+    #try:
+    tar=Tarjetas()
+    tar.idUsuario = request.form['idUsuario']
+    tar.noTarjeta = request.form['noTarjeta']
+    tar.saldo = request.form['saldo']
+    tar.banco = request.form['banco']
+    tar.estatus = 'Activa'
+    tar.agregar()
+        #flash('¡ Tarjeta agregada con exito !')
+    #except:
+       # flash('¡ Error al agregar la Tarjeta !')
     return redirect(url_for('consultaTarjetas'))
 
 #REDIRECCIONA A LA PAGINA PARA CONSULTAR TARJETAS
@@ -352,18 +417,18 @@ def consultaTarjetas():
 #REDIRECCIONA A LA PAGINA PARA EDITAR TARJETAS
 @app.route('/usuarios/EditarTarjeta',methods=['POST'])
 def editarTarjeta():
-    try:
-        tar=Tarjetas()
-        tar.idTarjeta = request.form['idTarjeta']
-        tar.idUsuario = request.form['idUsuario']
-        tar.noTarjeta = request.form['noTarjeta']
-        tar.saldo = request.form['saldo']
-        tar.banco = request.form['banco']
-        tar.estatus = request.values.get("estatus","Inactiva")
-        tar.editar()
-        flash('¡ Tarjeta editada con exito !')
-    except:
-        flash('¡ Error al editar la Tarjeta !')
+    #try:
+    tar=Tarjetas()
+    tar.idTarjeta = request.form['idTarjeta']
+    tar.idUsuario = request.form['idUsuario']
+    tar.noTarjeta = request.form['noTarjeta']
+    tar.saldo = request.form['saldo']
+    tar.banco = request.form['banco']
+    tar.estatus = request.values.get("estatus","Inactiva")
+    tar.editar()
+    #flash('¡ Tarjeta editada con exito !')
+    #except:
+    #flash('¡ Error al editar la Tarjeta !')
 
     return redirect(url_for('consultaTarjetas'))
 
