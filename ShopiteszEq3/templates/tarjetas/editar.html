@@ -1,0 +1,90 @@
+{% extends "layout.html" %}
+
+{% block titulo%}
+Alta Tarjetas
+{% endblock %}
+
+{% block content %}
+{{super()}}
+
+<div>
+    <div class=" d-flex justify-content-center py-4" style="height: 800px">
+        <div>
+            <div class="card text-white bg-success mb-3 text-center shadow-lg" style="max-width: rem; width: 500PX;">
+                <div class="card-header">
+                    <img src="../../static/img/tec.jpg" alt="" width="30" height="24"
+                        class="d-inline-block align-text-top">
+                    Editar Tarjeta
+                </div>
+                <div class="card-body bg-light text-dark">
+                    <form action="/usuarios/EditarTarjeta" method="post" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="nombre">ID:</label>
+                            <input type="text" name="idTarjeta" class="input" value='{{tar.idTarjeta}}' readonly>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label for="nombre">Usuario:</label>
+                            <input type="text" name="idUsuario" class="input" value='{{tar.idUsuario}}' required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Numero de tarjeta:</label>
+                            <input type="text" name="noTarjeta" class="input" value='{{tar.noTarjeta}}' required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Saldo:</label>
+                            <input type="number" name="saldo" class="input" min="0" value='{{tar.saldo}}' required>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label>Banco:</label>
+                            <input type="text" name="banco" class="input" value='{{tar.banco}}' required>
+                        </div>
+                        <div class="form-control">
+                            <label for="estatus">Estatus:</label>
+                            {% if tar.estatus=='A' %}
+                            <input type="checkbox" name="estatus" value="A" checked> Activo
+                            {% else %}
+                            <input type="checkbox" name="estatus" value="I"> Inactivo
+                            {% endif %}
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                        <a href="#" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#borrar">
+                            Eliminar
+                        </a>
+                        <a href="/usuarios/Tarjetas" class="btn btn-danger">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<script src="../../static/js/bootstrap.min.js"></script>
+
+
+<!-- Modal para ver el cuadro de dialogo de eliminar-->
+<div id="borrar" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h4 class="modal-title">Eliminación de Tarjeta</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿ Estas seguro de eliminar la Tarjeta: <b>{{tar.noTarjeta}} ?</b> </p>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" href="/tarjetas/eliminar/{{tar.idTarjeta}}">Aceptar</a>
+                <button type="button" class="btn btn-info bg-danger text-white" data-bs-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

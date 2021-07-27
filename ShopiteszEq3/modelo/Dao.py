@@ -256,22 +256,22 @@ class Pedidos(UserMixin,db.Model):
 
 
 #TARJETAS---------------------
+#TABLA DE TARJETAS
 class Tarjetas(db.Model):
-    __tablename__='Tarjetas'
-    idTarjeta=Column(Integer,primary_key=True)
-    idUsuario = Column(Integer)
-    estatus=Column(String,nullable=False)
-    imagen=Column(BLOB)
+    _tablename_='Tarjetas'
+    idTarjeta = Column( Integer, primary_key = True )
+    idUsuario = Column( Integer,ForeignKey('Usuarios.idUsuario') )
+    noTarjeta = Column( String, unique = True )
+    saldo = Column( String, nullable = False )
+    banco = Column( String, nullable = False )
+    estatus = Column( String, nullable = False )
 
     def consultaGeneral(self):
         return self.query.all()
-        #return self.query.filter(Categoria.estatus=='Activa').all()
+        #return self.query.filter(Tarjetas.estatus=='Activa').all()
 
     def consultaIndividuall(self,id):
         return Tarjetas.query.get(id)
-
-    def consultarImagen(self,id):
-        return self.consultaIndividuall(id).imagen
 
     def agregar(self):
         db.session.add(self)
@@ -282,12 +282,12 @@ class Tarjetas(db.Model):
         db.session.commit()
 
     def eliminar(self,id):
-        cat=self.consultaIndividuall(id)
-        db.session.delete(cat)
+        tar=self.consultaIndividuall(id)
+        db.session.delete(tar)
         db.session.commit()
 
     def eliminacionLogica(self,id):
-        cat = self.consultaIndividuall(id)
-        cat.estatus='Inactiva'
-        cat.editar()
+        tar = self.consultaIndividuall(id)
+        tar.estatus='Inactiva'
+        tar.editar()
 

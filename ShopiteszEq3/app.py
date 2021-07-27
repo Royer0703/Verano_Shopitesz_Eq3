@@ -321,6 +321,66 @@ def consultarPedidos():
     return "Pedidos del usuario:"+current_user.nombreCompleto+", tipo:"+current_user.tipo
 
 # fin del manejo de pedidos
+
+#REDIRECCIONA A LA PAGINA PARA AGREGAR TARJETAS
+@app.route('/usuarios/AltaTarjeta',methods=['post'])
+def agregarTarjeta():
+    try:
+        tar=Tarjetas()
+        tar.idUsuario = request.form['idUsuario']
+        tar.noTarjeta = request.form['noTarjeta']
+        tar.saldo = request.form['saldo']
+        tar.banco = request.form['banco']
+        tar.estatus = 'A'
+        tar.agregar()
+        flash('¡ Tarjeta agregada con exito !')
+    except:
+        flash('¡ Error al agregar la Tarjeta !')
+    return redirect(url_for('consultaTarjetas'))
+
+#REDIRECCIONA A LA PAGINA PARA CONSULTAR TARJETAS
+@app.route('/usuarios/Tarjetas')
+def consultaTarjetas():
+    tar=Tarjetas()
+    return render_template('Tarjetas/ConsultaTarjetas.html', Tarjetas = tar.consultaGeneral())
+
+#REDIRECCIONA A LA PAGINA PARA EDITAR TARJETAS
+@app.route('/usuarios/EditarTarjeta',methods=['POST'])
+def editarTarjeta():
+    try:
+        tar=Tarjetas()
+        tar.idTarjeta = request.form['idTarjeta']
+        tar.idUsuario = request.form['idUsuario']
+        tar.noTarjeta = request.form['noTarjeta']
+        tar.saldo = request.form['saldo']
+        tar.banco = request.form['banco']
+        tar.estatus = request.values.get("estatus","Inactiva")
+        tar.editar()
+        flash('¡ Tarjeta editada con exito !')
+    except:
+        flash('¡ Error al editar la Tarjeta !')
+
+    return redirect(url_for('consultaTarjetas'))
+
+#ELIMINAR TARJETAS
+@app.route('/tarjetas/eliminar/<int:id>')
+def eliminarTarjeta(id):
+    try:
+        tar=Tarjetas()
+        #tarjeta.eliminar(id)
+        tar.eliminacionLogica(id)
+        flash('Tarjeta eliminada con exito')
+    except:
+        flash('Error al eliminar la Tarjeta')
+    return redirect(url_for('consultaTarjetas'))
+
+#CONSULTAR TARJETA ESPECIFICA
+@app.route('/Tarjetas/<int:id>')
+def consultarTarjeta(id):
+    tar = Tarjetas()
+    ur = Usuario()
+    return render_template('Tarjetas/EditarTarjeta.html', tar = tar.consultaIndividuall(id))
+
 #manejo de errores
 @app.errorhandler(404)
 def error_404(e):
@@ -332,3 +392,4 @@ def error_500(e):
 if __name__=='__main__':
     db.init_app(app)#Inicializar la BD - pasar la configuración de la url de la BD
     app.run(debug=True)
+
