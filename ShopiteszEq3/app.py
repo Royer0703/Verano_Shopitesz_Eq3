@@ -457,6 +457,20 @@ def eeditarPedidos(id):
     pedidos = Pedidos()
     return render_template('pedidos/editar.html', pedidos = pedidos.consultaIndividuall(id))
 
+@app.route('/pedidos/eliminar/<int:id>')
+@login_required
+def eliminarPedido(id):
+    if current_user.is_authenticated and current_user.is_admin():
+        try:
+            pedidos=Pedidos()
+            pedidos.eliminacionLogica(id)
+            flash('Pedido eliminado con exito')
+        except:
+            flash('Error al eliminar Pedido')
+        return redirect(url_for('consultarPedido'))
+    else:
+        return redirect(url_for('mostrar_login'))
+
 
 # fin del manejo de pedidos************************************************************************************************
 

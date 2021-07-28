@@ -60,7 +60,7 @@
             <span class="glyphicon glyphicon-trash"></span>
             Eliminar
         </a>
-        <a href="#" class="btn btn-info">
+        <a href="/Pedidos" class="btn btn-info">
             <span class="glyphicon glyphicon-arrow-left"></span>
             Cancelar
         </a>
@@ -79,13 +79,13 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Eliminación de Tarjetas</h4>
+                <h4 class="modal-title">Eliminación de Pedido</h4>
             </div>
             <div class="modal-body">
-                <p>¿ Estas seguro de eliminar la Tarjeta:<b>{{pedidos.idPedido}} ?</b> </p>
+                <p>¿ Estas seguro de eliminar el Pedido:<b>{{pedidos.idPedido}} ?</b> </p>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-primary" href="">Aceptar</a>
+                <a class="btn btn-primary" href="/pedidos/eliminar/{{pedidos.idPedido}}">Aceptar</a>
                 <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
