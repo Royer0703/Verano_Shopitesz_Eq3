@@ -1,16 +1,18 @@
 {% extends 'comunes/base.html' %}
 {% block navbar %}
-    {{super()}}
-    {% include 'comunes/menu.html' %}
+{{super()}}
+{% include 'comunes/menu.html' %}
 {% endblock %}
 {% block contenido %}
 <link rel="stylesheet" href="{{url_for('static',filename='css/styleCrearCategoria.css')}}">
-    <h1>LISTADO DE PRODUCTOS</h1>
-    <div class="table-responsive">
-        <a href="/productos/nuevo" class="btn btn-success">
-            <span class="glyphicon glyphicon-plus-sign"></span>
-           Agregar Producto
-       </a>
+<h1>LISTADO DE PRODUCTOS</h1>
+{% if current_user.is_authenticated and current_user.is_admin() %}
+<div class="table-responsive">
+    <a href="/productos/nuevo" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus-sign"></span>
+        Agregar Producto
+    </a>
+{% endif %}
     <table class="table table-bordered">
         <thead>
             <th>NOMBRE</th>
@@ -18,24 +20,26 @@
             <th>PRECIO</th>
             <th>STOCK</th>
             <th>ESTATUS</th>
+            {% if current_user.is_authenticated and current_user.is_admin() %}
             <th>VER</th>
+            {% endif %}
         </thead>
         {% for producto in productos %}
-            <tr>
-                <td>{{producto.nombre}}</td>
-                <td>{{producto.descripcion}}</td>
-                <td>{{producto.precioVenta}}</td>
-                <td>{{producto.existencia}}</td>
-                <td>{{producto.estatus}}</td>
-                {% if current_user.is_authenticated and current_user.is_admin() %}
-                <td>
-                    <a href="/productos/{{producto.idProducto}}">
-                        <span class="glyphicon glyphicon-eye-open"></span>
-                    </a>
-                </td>
+        <tr>
+            <td>{{producto.nombre}}</td>
+            <td>{{producto.descripcion}}</td>
+            <td>{{producto.precioVenta}}</td>
+            <td>{{producto.existencia}}</td>
+            <td>{{producto.estatus}}</td>
+            {% if current_user.is_authenticated and current_user.is_admin() %}
+            <td>
+                <a href="/productos/{{producto.idProducto}}">
+                    <span class="glyphicon glyphicon-eye-open"></span>
+                </a>
+            </td>
             {% endif %}
-            </tr>
+        </tr>
         {% endfor %}
     </table>
-    </div>
+</div>
 {% endblock %}

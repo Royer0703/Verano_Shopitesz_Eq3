@@ -8,12 +8,12 @@
 {{super()}}
 <div>
     <h1 class="bg-primary text-center">Listado de Categorias</h1>
-
+    {% if current_user.is_authenticated and current_user.is_admin() %}
     <a href="/Categorias/nueva" class="btn btn-success">
          <span class="glyphicon glyphicon-plus-sign"></span>
         Agregar Categoria
     </a>
-
+{% endif %}
     <table class="table table-bordered">
         <th>ID</th>
         <th>NOMBRE</th>

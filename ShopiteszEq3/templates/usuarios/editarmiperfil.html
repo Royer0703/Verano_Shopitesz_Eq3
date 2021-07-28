@@ -11,8 +11,9 @@
   <title>Editar Cuenta</title>
 </head>
 <body>
-  <form class="form-CrearCuenta" action="/Usuarios/modificar" method="post" enctype="multipart/form-data">
+  <form class="form-CrearCuenta" action="/usuarios/editarperfil" method="post" enctype="multipart/form-data">
     <h4>Editar Perfil</h4>
+    <input class="controls" type="number" name="id" id="id" placeholder="Ingrese su Nombre Completo" value="{{current_user.idUsuario}}">
     <input class="controls" type="text" name="nombre" id="nombres" placeholder="Ingrese su Nombre Completo" value="{{current_user.nombreCompleto}}">
     <input class="controls" type="text" name="direccion" id="apellidos" placeholder="Ingrese su direccio" value="{{current_user.direccion}}">
     <input class="controls" type="tel" name="telefono" id="telefono" placeholder="Ingrese su Telefono" value="{{current_user.telefono}}">

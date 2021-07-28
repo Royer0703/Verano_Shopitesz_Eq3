@@ -83,6 +83,23 @@ def editarUsuario():
         usuario.editar()
         return redirect(url_for('consultarUsuarios'))
 
+@app.route('/usuarios/editarperfil',methods=['POST'])
+@login_required
+def editarUsuarioPerfil():
+    if current_user.is_authenticated:
+        usuario = Usuario()
+        usuario.idUsuario = request.form['id']
+        usuario.nombreCompleto = request.form['nombre']
+        usuario.telefono = request.form['telefono']
+        usuario.direccion = request.form['direccion']
+        usuario.email = request.form['email']
+        usuario.genero = request.form['genero']
+        usuario.password = request.form['password']
+        usuario.tipo = request.values.get("tipo", "Comprador")
+        usuario.estatus = request.values.get("estatus","Inactiva")
+        usuario.editar()
+        return redirect(url_for('inicio'))
+
 @app.route('/usuarios/<int:id>')
 @login_required
 def consultaUsuario(id):

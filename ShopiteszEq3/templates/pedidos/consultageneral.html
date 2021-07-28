@@ -7,10 +7,12 @@
 <link rel="stylesheet" href="{{url_for('static',filename='css/styleCrearCategoria.css')}}">
     <h1>LISTADO DE PEDIDOS</h1>
     <div class="table-responsive">
+        {% if current_user.is_authenticated and current_user.is_admin() %}
         <a href="/pedidos/agregar" class="btn btn-success">
             <span class="glyphicon glyphicon-plus-sign"></span>
            Agregar pedidos
        </a>
+       {% endif %}
     <table class="table table-bordered">
         <thead>
             <th>IDPEDIDO</th>
@@ -23,7 +25,9 @@
             <th>CIERRE</th>
             <th>TOTAL</th>
             <th>ESTATUS</th>
+            {% if current_user.is_authenticated and current_user.is_admin() %}
             <th>VER</th>
+            {% endif %}
         </thead>
         {% for pedidos in Pedidos %}
             <tr>
