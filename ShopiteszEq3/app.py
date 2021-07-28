@@ -66,6 +66,45 @@ def agregarUsuario():
        # flash('¡ Error al agregar al usuario !')
     return redirect(url_for('consultarUsuarios'))
 
+@app.route('/usuarios/editar',methods=['POST'])
+@login_required
+def editarUsuario():
+    if current_user.is_authenticated and current_user.is_admin():
+        usuario = Usuario()
+        usuario.idUsuario = request.form['id']
+        usuario.nombreCompleto = request.form['nombre']
+        usuario.telefono = request.form['telefono']
+        usuario.direccion = request.form['direccion']
+        usuario.email = request.form['email']
+        usuario.genero = request.form['genero']
+        usuario.password = request.form['password']
+        usuario.tipo = request.values.get("tipo", "Comprador")
+        usuario.estatus = request.values.get("estatus","Inactiva")
+        usuario.editar()
+        return redirect(url_for('consultarUsuarios'))
+
+@app.route('/usuarios/<int:id>')
+@login_required
+def consultaUsuario(id):
+    if current_user.is_authenticated and current_user.is_admin():
+        usuarios=Usuario()
+        return render_template('usuarios/editar.html',user=usuarios.consultaIndividuall(id))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+@app.route('/usuarios/eliminar/<int:id>')
+@login_required
+def eliminarUsuario(id):
+    if current_user.is_authenticated and current_user.is_admin():
+        try:
+            usuario=Producto()
+            usuario.eliminacionLogica(id)
+            flash('Usuario eliminada con exito')
+        except:
+            flash('Error al eliminar el usuario')
+        return redirect(url_for('consultarUsuarios'))
+    else:
+        return redirect(url_for('mostrar_login'))
 
 @app.route("/Usuarios/validarSesion",methods=['POST'])
 def login():

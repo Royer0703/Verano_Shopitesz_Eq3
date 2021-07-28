@@ -33,7 +33,7 @@
                 <td>{{usuario.estatus}}</td>
                 {% if current_user.is_authenticated and current_user.is_admin() %}
                 <td>
-                    <a href="/Usuarios/verPerfil">
+                    <a href="/usuarios/{{usuario.idUsuario}}">
                         <span class="glyphicon glyphicon-eye-open"></span>
                     </a>
                 </td>
