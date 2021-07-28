@@ -19,8 +19,8 @@
             <th>DESCRIPCION</th>
             <th>PRECIO</th>
             <th>STOCK</th>
-            <th>ESTATUS</th>
             {% if current_user.is_authenticated and current_user.is_admin() %}
+            <th>ESTATUS</th>
             <th>VER</th>
             {% endif %}
         </thead>
@@ -30,8 +30,9 @@
             <td>{{producto.descripcion}}</td>
             <td>{{producto.precioVenta}}</td>
             <td>{{producto.existencia}}</td>
-            <td>{{producto.estatus}}</td>
             {% if current_user.is_authenticated and current_user.is_admin() %}
+            <td>{{producto.estatus}}</td>
+
             <td>
                 <a href="/productos/{{producto.idProducto}}">
                     <span class="glyphicon glyphicon-eye-open"></span>
