@@ -1,75 +1,77 @@
 <nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">SHOPITESZ</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/"><span class="glyphicon glyphicon-home"></span>Home</a></li>
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">CATALOGOS
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/Categorias">CATEGORIAS</a></li>
-            <li><a href="/productos">PRODUCTOS</a></li>
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">PEDIDOS
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/Pedidos">PEDIDOS</a></li>
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">USUARIOS
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/usuaios">Usuarios</a></li>
-            <li><a href="/Usuarios/nuevo">Registro de Usuarios</a></li>
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">ENVIOS
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/envios">Mis Envios</a></li>
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">PAQUETERIAS
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/paqueterias">PAQUETERIAS</a></li>
-          </ul>
-        </li>
-
-        <li class="dropdown">
-          <a class="dropdown-toggle" data-toggle="dropdown" href="#">TARJETAS
-          <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><a href="/usuarios/Tarjetas">TARJETAS</a></li>
-          </ul>
-        </li>
-
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-
-              <li style="float:right"><a href="/Usuarios/iniciarSesion"><span class="glyphicon glyphicon-log-in"></span> Iniciar Sesion</a></li>
-
-              <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                  <span class="glyphicon glyphicon-user"></span>{{current_user.nombreCompleto}}
-                <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="/Usuarios/verPerfil"><span class="glyphicon glyphicon-edit"></span> Editar mi perfil</a></li>
-                  <li><a href="/Usuarios/cerrarSesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion</a></li>
-                </ul>
-              </li>
-
-        </ul>
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">SHOPITESZ</a>
     </div>
-  </nav>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="/"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">CATALOGOS
+          <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/Categorias">CATEGORIAS</a></li>
+          <li><a href="/productos">PRODUCTOS</a></li>
+        </ul>
+      </li>
+
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">PEDIDOS
+          <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/Pedidos">PEDIDOS</a></li>
+        </ul>
+      </li>
+
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">USUARIOS
+          <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/usuaios">Usuarios</a></li>
+          <li><a href="/Usuarios/nuevo">Registro de Usuarios</a></li>
+        </ul>
+      </li>
+
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">ENVIOS
+          <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/envios">Mis Envios</a></li>
+        </ul>
+      </li>
+
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">PAQUETERIAS
+          <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/paqueterias">PAQUETERIAS</a></li>
+        </ul>
+      </li>
+
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">TARJETAS
+          <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/usuarios/Tarjetas">TARJETAS</a></li>
+        </ul>
+      </li>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      {% if not current_user.is_authenticated %}
+      <li style="float:right"><a href="/Usuarios/iniciarSesion"><span class="glyphicon glyphicon-log-in"></span> Iniciar
+          Sesion</a></li>
+      {% endif %}
+        
+      <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <span class="glyphicon glyphicon-user"></span>{{current_user.nombreCompleto}}
+          <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li><a href="/Usuarios/verPerfil"><span class="glyphicon glyphicon-edit"></span> Editar mi perfil</a></li>
+          <li><a href="/Usuarios/cerrarSesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion</a></li>
+        </ul>
+      </li>
+
+    </ul>
+  </div>
+</nav>

@@ -97,7 +97,7 @@ def consultaUsuario(id):
 def eliminarUsuario(id):
     if current_user.is_authenticated and current_user.is_admin():
         try:
-            usuario=Producto()
+            usuario=Usuario()
             usuario.eliminacionLogica(id)
             flash('Usuario eliminada con exito')
         except:
@@ -430,6 +430,10 @@ def consultarPedidos():
     pedidos = Pedidos()
     return render_template('pedidos/consultageneral.html', Pedidos=pedidos.consultaGeneral())
 
+@app.route('/pedidos/agregar')
+def agregarPedido():
+    return render_template('/pedidos/agregar.html')
+
 @app.route('/pedidos/EditarPedido',methods=['POST'])
 def agregarPedidos():
     #try:
@@ -449,7 +453,7 @@ def agregarPedidos():
     #except:
     #flash('¡ Error al editar la Tarjeta !')
 
-    return redirect(url_for('consultaPedidos'))
+    return redirect(url_for('consultarPedidos'))
 
 @app.route('/Pedidos/<int:id>')
 @login_required
@@ -467,7 +471,7 @@ def eliminarPedido(id):
             flash('Pedido eliminado con exito')
         except:
             flash('Error al eliminar Pedido')
-        return redirect(url_for('consultarPedido'))
+        return redirect(url_for('consultarPedidos'))
     else:
         return redirect(url_for('mostrar_login'))
 

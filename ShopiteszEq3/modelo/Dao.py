@@ -233,7 +233,7 @@ class Paqueterias(UserMixin,db.Model):
 
     def eliminacionLogica(self,id):
         paqueteria = self.consultaIndividuall(id)
-        paqueteria.estatus='Inactiva'
+        paqueteria.ESTATUS='Inactiva'
         paqueteria.editar()
 
 #PEDIDOS******************************************************************************************

@@ -1,7 +1,9 @@
 {% extends 'comunes/base.html' %}
-{% block contenido %}
+{% block navbar %}
 {{super()}}
-
+{% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
 <html lang="en">
 
 <head>
