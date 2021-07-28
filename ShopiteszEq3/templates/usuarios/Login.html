@@ -1,6 +1,10 @@
 {% extends 'comunes/base.html' %}
+{% block navbar %}
+{{super()}}
+{% include 'comunes/menu.html' %}
+{% endblock %}
 {% block contenido %}
-    {{super()}}
+{{super()}}
 
     <head>
         <meta charset="utf-8">

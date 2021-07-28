@@ -353,7 +353,7 @@ def agregarEnvio():
     envio.NOGUIA = request.form['numeroguia']
     envio.PESOPAQUETE = request.form['pesopaquete']
     envio.PRECIOGR = request.form['precio']
-    envio.TOTALAPAGAR = request.form['total']
+    envio.TOTALPAGAR = request.form['total']
     envio.ESTATUS = 'Activa'
     envio.agregar()
     return redirect(url_for('consultaEnvios'))

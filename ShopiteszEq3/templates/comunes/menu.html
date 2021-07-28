@@ -39,7 +39,7 @@
           <li><a href="/envios">Mis Envios</a></li>
         </ul>
       </li>
-
+      {% if current_user.is_authenticated and current_user.is_admin() %}
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">PAQUETERIAS
           <span class="caret"></span></a>
@@ -47,7 +47,7 @@
           <li><a href="/paqueterias">PAQUETERIAS</a></li>
         </ul>
       </li>
-
+      {% endif %}
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">TARJETAS
           <span class="caret"></span></a>
@@ -62,7 +62,7 @@
       <li style="float:right"><a href="/Usuarios/iniciarSesion"><span class="glyphicon glyphicon-log-in"></span> Iniciar
           Sesion</a></li>
       {% endif %}
-        
+      {% if  current_user.is_authenticated %}
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
           <span class="glyphicon glyphicon-user"></span>{{current_user.nombreCompleto}}
@@ -72,7 +72,7 @@
           <li><a href="/Usuarios/cerrarSesion"><span class="glyphicon glyphicon-log-out"></span> Cerrar Sesion</a></li>
         </ul>
       </li>
-
+      {% endif %}
     </ul>
   </div>
 </nav>

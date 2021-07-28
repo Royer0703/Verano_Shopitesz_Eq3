@@ -1,6 +1,10 @@
 {% extends 'comunes/base.html' %}
+{% block navbar %}
+{{super()}}
+{% include 'comunes/menu.html' %}
+{% endblock %}
 {% block contenido %}
-    {{super()}}
+{{super()}}
 
 <html lang="en">
 <head>
@@ -50,7 +54,8 @@
       <label class="radio-inline"><input type="radio" name="genero" value="M" checked>Masculino</label>
       {% endif %}
   </div>
-    <a href="/Usuarios/agregar"><input class="buttons" type="submit" value="Registrar"></a> 
+    <a href="/Usuarios/agregar"><input class="buttons" type="submit" value="Registrar"></a>
+    <a href="/"><input class="buttons" type="button" value="Cancelar"></a> 
   </form>
 
 </body>
