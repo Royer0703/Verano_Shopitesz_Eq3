@@ -455,6 +455,26 @@ def agregarPedidos():
 
     return redirect(url_for('consultarPedidos'))
 
+@app.route('/pedidos/AltaPedido',methods=['post'])
+def altaPedido():
+    #try:
+    pedidos=Pedidos()
+    pedidos.idPedido = request.form['idPedido']
+    pedidos.idComprador = request.form['idComprador']
+    pedidos.idVendedor = request.form['idVendedor']
+    pedidos.idTarjeta = request.form['idTarjeta']
+    pedidos.fechaRegistro = request.form['fechaRegistro']
+    pedidos.fechaAtencion = request.form['fechaAtencion']
+    pedidos.fechaRecepcion = request.form['fechaRecepcion']
+    pedidos.fechaCierre = request.form['fechaCierre']
+    pedidos.total = request.form['total']
+    pedidos.estatus = 'Activa'
+    pedidos.agregar()
+        #flash('¡ Tarjeta agregada con exito !')
+    #except:
+       # flash('¡ Error al agregar la Tarjeta !')
+    return redirect(url_for('consultarPedidos'))
+
 @app.route('/Pedidos/<int:id>')
 @login_required
 def eeditarPedidos(id):

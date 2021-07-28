@@ -8,33 +8,34 @@
     <title>Pedidos</title>
 </head>
 <body>
-    <section class="form-DetallePedidos">
+    <form class="form-DetallePedidos" action="/pedidos/AltaPedido" method="post" enctype="multipart/form-data">
         <h4>Pedidos</h4>
-        <label for="">Pedido</label>
         <label>Id Pedido</label>
-        <input class="controls" type="number" name="Id pedido" id="Id pedido" placeholder="">
+        <input class="controls" type="number" name="idPedido"  placeholder="">
         <label>Id Comprador</label>
-        <input class="controls" type="number" name="Id Comprador" id="Id Comprador" placeholder="">
+        <input class="controls" type="number" name="idComprador"  placeholder="">
         <label>Id Tarjeta</label>
-        <input class="controls" type="number" name="Id Tarjeta" id="Id Tarjeta" placeholder="">
+        <input class="controls" type="number" name="idTarjeta"  placeholder="">
+        <label>Id Vendedor</label>
+        <input class="controls" type="number" name="idVendedor"  placeholder="">
         <label>Fecha Registro</label>
-        <input class="controls" type="date" name="Fecha Registro" id="Fecha Registro" placeholder="">
+        <input class="controls" type="date" name="fechaRegistro"  placeholder="">
         <label>Fecha Atencion</label>
-        <input class="controls" type="date" name="Fecha Atencion" id="Fecha Atencion" placeholder="">
+        <input class="controls" type="date" name="fechaAtencion"  placeholder="">
         <label>Fecha Recepcion</label>
-        <input class="controls" type="date" name="Fecha Recepcion" id="Fecha Recepcion" placeholder="">
+        <input class="controls" type="date" name="fechaRecepcion"  placeholder="">
         <label>Fecha Cierre</label>
-        <input class="controls" type="date" name="Fecha Cierre" id="Fecha Cierre" placeholder="">
+        <input class="controls" type="date" name="fechaCierre"  placeholder="">
         <label>Total</label>
-        <input class="controls" type="number" name="Total" id="Total" placeholder="">
+        <input class="controls" type="number" name="total"  placeholder="">
         <label for="">Estatus</label>
         <input class="radios" type="radio" id="Activo" name="estatus" value="Activo" checked>
         <label class="radios" for="Activo">Activo</label>
         <input class="radios" type="radio" id="Inactivo" name="estatus" value="Activo">
         <label class="radios" for="Activo">Inactivo</label>
         <br>
-        <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Guardar"></a>
-        <a href="/paginaPrincipal"><input class="buttons" type="submit" value="Cancelar"></a>
-    </section>
+        <a href="/pedidos/AltaPedido"><input class="buttons" type="submit" value="Guardar"></a>
+        <a href="/Pedidos"><input class="buttons" type="buttons" value="Cancelar"></a>
+    </form>
 </body>
 </html>
