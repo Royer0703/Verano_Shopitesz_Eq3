@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from flask import Flask,render_template,request,redirect,url_for,flash,session,abort
 from flask_bootstrap import Bootstrap
-from modelo.Dao import db, Categoria, Producto, Usuario, Envios, Paqueterias, Tarjetas
+from modelo.Dao import db, Categoria, Producto, Usuario, Envios, Paqueterias, Tarjetas,Pedidos
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
 app = Flask(__name__)
 Bootstrap(app)
@@ -16,7 +16,7 @@ login_manager.login_view='mostrar_login'
 login_manager.login_message='¡ Tu sesión expiró !'
 login_manager.login_message_category="info"
 
-# Urls defininas para el control de usuario
+# Urls defininas para el control de usuario**************************************************************************
 @app.before_request
 def before_request():
     session.permanent=True
@@ -92,7 +92,7 @@ def consultarUsuario():
     return render_template('usuarios/editarmiperfil.html')
 #fin del manejo de usuarios
 
-#PRODUCTOS-------------------------------------
+#PRODUCTOS***************************************************************************************************************
 @app.route("/productos")
 def consultarProductos():
     producto=Producto()
@@ -105,6 +105,7 @@ def consultarProducto(id):
         return render_template('productos/editar.html',producto=producto.consultaIndividuall(id))
     else:
         return redirect(url_for('mostrar_login'))
+
 @app.route('/productos/agregar',methods=['post'])
 def agregarProductos():
     #try:
@@ -182,7 +183,7 @@ def consultarCliente(nombre):
 def consultarPorductosPorPrecio(precio):
     return "Hola"+str(precio)
 
-#CRUD de Categorias
+#CRUD de Categorias*******************************************************************************************************************
 @app.route('/Categorias')
 def consultaCategorias():
     cat=Categoria()
@@ -275,7 +276,7 @@ def eliminarCategoria(id):
 #Fin del crud de categorias
 
 
-#Envios
+#Envios*****************************************************************************************************************
 @app.route('/envios')
 def consultaEnvios():
     envio=Envios()
@@ -312,7 +313,7 @@ def consultarEnvios(id):
 
 
 
-#PAQUETERIAS
+#PAQUETERIAS***************************************************************************************************************
 @app.route('/paqueterias')
 def consultaPaqueterias():
     paqueteria=Paqueterias()
@@ -383,13 +384,42 @@ def eliminarPaqueteria(id):
         return redirect(url_for('mostrar_login'))
 
 
-# manejo de pedidos
+# manejo de pedidos********************************************************************************************************
 @app.route('/Pedidos')
 @login_required
 def consultarPedidos():
-    return "Pedidos del usuario:"+current_user.nombreCompleto+", tipo:"+current_user.tipo
+    pedidos = Pedidos()
+    return render_template('pedidos/consultageneral.html', Pedidos=pedidos.consultaGeneral())
 
-# fin del manejo de pedidos
+@app.route('/pedidos/EditarPedido',methods=['POST'])
+def agregarPedidos():
+    #try:
+    pedidos=Pedidos()
+    pedidos.idPedido = request.form['idPedido']
+    pedidos.idComprador = request.form['idComprador']
+    pedidos.idVendedor = request.form['idVendedor']
+    pedidos.idTarjeta = request.form['idTarjeta']
+    pedidos.fechaRegistro = request.form['fechaRegistro']
+    pedidos.fechaAtencion = request.form['fechaAtencion']
+    pedidos.fechaRecepcion = request.form['fechaRecepcion']
+    pedidos.fechaCierre = request.form['fechaCierre']
+    pedidos.total = request.form['total']
+    pedidos.estatus = request.values.get("estatus","Inactiva")
+    pedidos.editar()
+    #flash('¡ Tarjeta editada con exito !')
+    #except:
+    #flash('¡ Error al editar la Tarjeta !')
+
+    return redirect(url_for('consultaPedidos'))
+
+@app.route('/Pedidos/<int:id>')
+@login_required
+def eeditarPedidos(id):
+    pedidos = Pedidos()
+    return render_template('pedidos/editar.html', pedidos = pedidos.consultaIndividuall(id))
+
+
+# fin del manejo de pedidos************************************************************************************************
 
 
 @app.route('/tarjetas/agregar')

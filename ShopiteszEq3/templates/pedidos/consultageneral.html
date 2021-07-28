@@ -1,0 +1,51 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/styleCrearCategoria.css')}}">
+    <h1>LISTADO DE PEDIDOS</h1>
+    <div class="table-responsive">
+        <a href="/Pedidos" class="btn btn-success">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+           Agregar pedidos
+       </a>
+    <table class="table table-bordered">
+        <thead>
+            <th>IDPEDIDO</th>
+            <th>IDCOMPRADOR</th>
+            <th>IDVENDEDOR</th>
+            <th>IDTARJETA</th>
+            <th>REGISTRO</th>
+            <th>ATENCION</th>
+            <th>RECEPCION</th>
+            <th>CIERRE</th>
+            <th>TOTAL</th>
+            <th>ESTATUS</th>
+            <th>VER</th>
+        </thead>
+        {% for pedidos in Pedidos %}
+            <tr>
+                <td>{{pedidos.idPedido}}</td>
+                <td>{{pedidos.idComprador}}</td>
+                <td>{{pedidos.idVendedor}}</td>
+                <td>{{pedidos.idTarjeta}}</td>
+                <td>{{pedidos.fechaRegistro}}</td>
+                <td>{{pedidos.fechaAtencion}}</td>
+                <td>{{pedidos.fechaRecepcion}}</td>
+                <td>{{pedidos.fechaCierre}}</td>
+                <td>{{pedidos.total}}</td>
+                <td>{{pedidos.estatus}}</td>
+                {% if current_user.is_authenticated and current_user.is_admin() %}
+                <td>
+                    <a href="/Pedidos/{{pedidos.idPedido}}">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                    </a>
+                </td>
+            {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+{% endblock %}

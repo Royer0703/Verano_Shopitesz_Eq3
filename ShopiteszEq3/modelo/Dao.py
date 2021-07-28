@@ -162,7 +162,7 @@ class Usuario(UserMixin,db.Model):
 
 
 
-#ENVIOS
+#ENVIOS**********************************************************************************************
 class Envios(UserMixin,db.Model):
     __tablename__='ENVIOS'
     IDENVIO=Column(Integer,primary_key=True)
@@ -202,7 +202,7 @@ class Envios(UserMixin,db.Model):
         envios.estatus='Inactiva'
         envios.editar()
 
-#PAQUETERIAS
+#PAQUETERIAS******************************************************************************************
 class Paqueterias(UserMixin,db.Model):
     __tablename__='PAQUETERIAS'
     IDPAQUETERIA=Column(Integer,primary_key=True)
@@ -236,7 +236,7 @@ class Paqueterias(UserMixin,db.Model):
         paqueteria.estatus='Inactiva'
         paqueteria.editar()
 
-#PEDIDOS
+#PEDIDOS******************************************************************************************
 class Pedidos(UserMixin,db.Model):
     __tablename__='Pedidos'
     idPedido=Column(Integer,primary_key=True)
