@@ -4,7 +4,7 @@ from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash,check_password_hash
 db=SQLAlchemy()
-
+#CATEGORIAS***************************************************************************
 class Categoria(db.Model):
     __tablename__='Categorias'
     idCategoria=Column(Integer,primary_key=True)
@@ -39,7 +39,7 @@ class Categoria(db.Model):
         cat = self.consultaIndividuall(id)
         cat.estatus='Inactiva'
         cat.editar()
-
+#PRODUCTOS****************************************************************
 class Producto(db.Model):
     __tablename__='Productos'
     idProducto=Column(Integer,primary_key=True)
@@ -75,7 +75,7 @@ class Producto(db.Model):
         Producto = self.consultaIndividuall(id)
         Producto.estatus='Inactiva'
         Producto.editar()
-
+#USUARIOS********************************************************************************
 class Usuario(UserMixin,db.Model):
     __tablename__='Usuarios'
     idUsuario=Column(Integer,primary_key=True)
@@ -275,7 +275,7 @@ class Pedidos(UserMixin,db.Model):
         pedidos.editar()
 
 
-#TARJETAS---------------------
+#TARJETAS---------------------**************************************************
 #TABLA DE TARJETAS
 class Tarjetas(db.Model):
     _tablename_='Tarjetas'
@@ -311,3 +311,41 @@ class Tarjetas(db.Model):
         tar.estatus='Inactiva'
         tar.editar()
 
+#DETALLEPEDIDOS*********************************************************************
+class Detallepedidos(UserMixin,db.Model):
+    __tablename__='DetallePedido'
+    idDetalle=Column(Integer,primary_key=True)
+    idPedido= Column( Integer,ForeignKey('Pedido.idPedido') )
+    idProducto= Column( Integer,ForeignKey('Productos.idProducto') )
+    precio=Column(Integer,nullable=False)
+    cantidadPedida=Column(Integer,nullable=False)
+    cantidadEnviada=Column(Integer,nullable=False)
+    cantidadAceptada=Column(Integer,nullable=False)
+    cantidadRechazada=Column(Integer,nullable=False)
+    subtotal=Column(Integer,nullable=False)
+    estatus=Column(String,nullable=False)
+    comentario=Column(String,nullable=False)
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividuall(self,id):
+        return dp.query.get(id)
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self,id):
+        dp=self.consultaIndividuall(id)
+        db.session.delete(dp)
+        db.session.commit()
+
+    def eliminacionLogica(self,id):
+        dp = self.consultaIndividuall(id)
+        dp.estatus='Inactiva'
+        dp.editar()

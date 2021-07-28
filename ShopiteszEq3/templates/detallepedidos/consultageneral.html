@@ -1,0 +1,56 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+    {{super()}}
+    {% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/styleCrearCategoria.css')}}">
+    <h1>LISTADO DE PEDIDOS</h1>
+    <div class="table-responsive">
+        {% if current_user.is_authenticated and current_user.is_admin() %}
+        <a href="/pedidos/agregar" class="btn btn-success">
+            <span class="glyphicon glyphicon-plus-sign"></span>
+           Agregar pedidos
+       </a>
+       {% endif %}
+    <table class="table table-bordered">
+        <thead>
+            <th>IDPETALLE</th>
+            <th>IDPEDIDO</th>
+            <th>IDPRODUCTO</th>
+            <th>PRECIO</th>
+            <th>CANTIDAD PEDIDA</th>
+            <th>CANTIDAD ENVIADA</th>
+            <th>CANTIDAD ACEPTADA</th>
+            <th>CANTIDAD RECHAZADA</th>
+            <th>SUBTOTAL</th>
+            <th>ESTATUS</th>
+            <th>COMENTARIOS</th>
+            {% if current_user.is_authenticated and current_user.is_admin() %}
+            <th>VER</th>
+            {% endif %}
+        </thead>
+        {% for pedidos in Pedidos %}
+            <tr>
+                <td>{{pedidos.idPedido}}</td>
+                <td>{{pedidos.idComprador}}</td>
+                <td>{{pedidos.idVendedor}}</td>
+                <td>{{pedidos.idTarjeta}}</td>
+                <td>{{pedidos.fechaRegistro}}</td>
+                <td>{{pedidos.fechaAtencion}}</td>
+                <td>{{pedidos.fechaRecepcion}}</td>
+                <td>{{pedidos.fechaCierre}}</td>
+                <td>{{pedidos.total}}</td>
+                <td>{{pedidos.estatus}}</td>
+                {% if current_user.is_authenticated and current_user.is_admin() %}
+                <td>
+                    <a href="/Pedidos/{{pedidos.idPedido}}">
+                        <span class="glyphicon glyphicon-eye-open"></span>
+                    </a>
+                </td>
+            {% endif %}
+            </tr>
+        {% endfor %}
+    </table>
+    </div>
+{% endblock %}
