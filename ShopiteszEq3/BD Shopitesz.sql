@@ -58,7 +58,7 @@ create table Carrito(
     
     constraint pk_carrito primary key(idCarrito),
     foreign key(idUsuario) references usuarios(idUsuario),
-    foreign key(idProducto) references producto(idProducto)
+    foreign key(idProducto) references productos(idProducto)
 );
 
 ----------------------/*TARJETA*/
@@ -131,3 +131,5 @@ grant select,insert,update,delete on shopitesz.Productos to user_shopitesz;
 grant select,insert,update,delete on shopitesz.paqueterias to user_shopitesz;
 grant select,insert,update,delete on shopitesz.envios to user_shopitesz;
 grant select,insert,update,delete on shopitesz.tarjetas to user_shopitesz;
+grant select,insert,update,delete on shopitesz.pedidos to user_shopitesz;
+grant select,insert,update,delete on shopitesz.carrito to user_shopitesz;
