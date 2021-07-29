@@ -312,7 +312,7 @@ class Tarjetas(db.Model):
         tar.editar()
 
 #DETALLEPEDIDOS*********************************************************************
-class Detallepedidos(UserMixin,db.Model):
+class DetallePedido(UserMixin,db.Model):
     __tablename__='DetallePedido'
     idDetalle=Column(Integer,primary_key=True)
     idPedido= Column( Integer,ForeignKey('Pedido.idPedido') )
@@ -330,7 +330,7 @@ class Detallepedidos(UserMixin,db.Model):
         return self.query.all()
 
     def consultaIndividuall(self,id):
-        return dp.query.get(id)
+        return DetallePedido.query.get(id)
 
     def agregar(self):
         db.session.add(self)

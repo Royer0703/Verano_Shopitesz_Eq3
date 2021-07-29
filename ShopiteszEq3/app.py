@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from flask import Flask,render_template,request,redirect,url_for,flash,session,abort
 from flask_bootstrap import Bootstrap
-from modelo.Dao import db, Categoria, Producto, Usuario, Envios, Paqueterias, Tarjetas,Pedidos,DetallePedidos
+from modelo.Dao import db, Categoria, Producto, Usuario, Envios, Paqueterias, Tarjetas,Pedidos,DetallePedido
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
 app = Flask(__name__)
 Bootstrap(app)
@@ -595,70 +595,6 @@ if __name__=='__main__':
 @app.route('/Detallepedido')
 @login_required
 def consultarDP():
-    dp = Pedidos()
-    return render_template('pedidos/consultageneral.html', Pedidos=dp.consultaGeneral())
+    dep = DetallePedido()
+    return render_template('detallepedidos/consultageneral.html', DetallePedido=dep.consultaGeneral())
 
-@app.route('/Detallepedido/agregar')
-def agregarDP():
-    return render_template('/pedidos/agregar.html')
-
-@app.route('/Detallepedido/EditarDetallePedido',methods=['POST'])
-def agregarDEP():
-    #try:
-    pedidos=Pedidos()
-    pedidos.idPedido = request.form['idPedido']
-    pedidos.idComprador = request.form['idComprador']
-    pedidos.idVendedor = request.form['idVendedor']
-    pedidos.idTarjeta = request.form['idTarjeta']
-    pedidos.fechaRegistro = request.form['fechaRegistro']
-    pedidos.fechaAtencion = request.form['fechaAtencion']
-    pedidos.fechaRecepcion = request.form['fechaRecepcion']
-    pedidos.fechaCierre = request.form['fechaCierre']
-    pedidos.total = request.form['total']
-    pedidos.estatus = request.values.get("estatus","Inactiva")
-    pedidos.editar()
-    #flash('¡ Tarjeta editada con exito !')
-    #except:
-    #flash('¡ Error al editar la Tarjeta !')
-
-    return redirect(url_for('consultarPedidos'))
-
-@app.route('/Detallepedidos/AltaDetallePedido',methods=['post'])
-def altaDePedido():
-    #try:
-    pedidos=Pedidos()
-    pedidos.idPedido = request.form['idPedido']
-    pedidos.idComprador = request.form['idComprador']
-    pedidos.idVendedor = request.form['idVendedor']
-    pedidos.idTarjeta = request.form['idTarjeta']
-    pedidos.fechaRegistro = request.form['fechaRegistro']
-    pedidos.fechaAtencion = request.form['fechaAtencion']
-    pedidos.fechaRecepcion = request.form['fechaRecepcion']
-    pedidos.fechaCierre = request.form['fechaCierre']
-    pedidos.total = request.form['total']
-    pedidos.estatus = 'Activa'
-    pedidos.agregar()
-        #flash('¡ Tarjeta agregada con exito !')
-    #except:
-       # flash('¡ Error al agregar la Tarjeta !')
-    return redirect(url_for('consultarPedidos'))
-
-@app.route('/Detallepedido/<int:id>')
-@login_required
-def eeditarDePedidos(id):
-    pedidos = Pedidos()
-    return render_template('pedidos/editar.html', pedidos = pedidos.consultaIndividuall(id))
-
-@app.route('/Detallepedido/eliminar/<int:id>')
-@login_required
-def eliminarDePedido(id):
-    if current_user.is_authenticated and current_user.is_admin():
-        try:
-            pedidos=Pedidos()
-            pedidos.eliminacionLogica(id)
-            flash('Pedido eliminado con exito')
-        except:
-            flash('Error al eliminar Pedido')
-        return redirect(url_for('consultarPedidos'))
-    else:
-        return redirect(url_for('mostrar_login'))

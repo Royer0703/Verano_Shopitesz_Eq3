@@ -5,17 +5,17 @@
 {% endblock %}
 {% block contenido %}
 <link rel="stylesheet" href="{{url_for('static',filename='css/styleCrearCategoria.css')}}">
-    <h1>LISTADO DE PEDIDOS</h1>
+    <h1>LISTADO DE DETALLES</h1>
     <div class="table-responsive">
         {% if current_user.is_authenticated and current_user.is_admin() %}
-        <a href="/pedidos/agregar" class="btn btn-success">
+        <a href="/Detallepedido/agregar" class="btn btn-success">
             <span class="glyphicon glyphicon-plus-sign"></span>
-           Agregar pedidos
+           Agregar Detalle
        </a>
        {% endif %}
     <table class="table table-bordered">
         <thead>
-            <th>IDPETALLE</th>
+            <th>IDDETALLE</th>
             <th>IDPEDIDO</th>
             <th>IDPRODUCTO</th>
             <th>PRECIO</th>
@@ -30,21 +30,22 @@
             <th>VER</th>
             {% endif %}
         </thead>
-        {% for pedidos in Pedidos %}
+        {% for dep in DetallePedido %}
             <tr>
-                <td>{{pedidos.idPedido}}</td>
-                <td>{{pedidos.idComprador}}</td>
-                <td>{{pedidos.idVendedor}}</td>
-                <td>{{pedidos.idTarjeta}}</td>
-                <td>{{pedidos.fechaRegistro}}</td>
-                <td>{{pedidos.fechaAtencion}}</td>
-                <td>{{pedidos.fechaRecepcion}}</td>
-                <td>{{pedidos.fechaCierre}}</td>
-                <td>{{pedidos.total}}</td>
-                <td>{{pedidos.estatus}}</td>
+                <td>{{dep.idDetalle}}</td>
+                <td>{{dep.idPedido}}</td>
+                <td>{{dep.idProducto}}</td>
+                <td>{{dep.precio}}</td>
+                <td>{{dep.cantidadPedida}}</td>
+                <td>{{dep.cantidadEnviada}}</td>
+                <td>{{dep.cantidadAceptada}}</td>
+                <td>{{dep.cantidadRechazada}}</td>
+                <td>{{dep.subtotal}}</td>
+                <td>{{dep.estatus}}</td>
+                <td>{{dep.comentario}}</td>
                 {% if current_user.is_authenticated and current_user.is_admin() %}
                 <td>
-                    <a href="/Pedidos/{{pedidos.idPedido}}">
+                    <a href="">
                         <span class="glyphicon glyphicon-eye-open"></span>
                     </a>
                 </td>
