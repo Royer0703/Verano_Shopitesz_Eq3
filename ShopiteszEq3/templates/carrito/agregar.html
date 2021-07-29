@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='css/Carrito.css')}}">
+    <title>Carrito</title>
+</head>
+<body>
+    <form class="form-Carrito" action="/carrito/agregar" method="post">
+        <label>idCarrito</label>
+        <input class="controls" type="number" name="idCarrito" id="idCarrito" placeholder="Ingresa el id Carrito">
+        <label>idUsuario</label>
+        <input class="controls" type="number" name="idUsuario" id="idUsuario" placeholder="Ingresa el id idUsuario">
+        <label>idProducto</label>
+        <input class="controls" type="number" name="idProducto" id="idProducto" placeholder="Ingresa el id Producto">
+        <label>Fecha</label>
+        <input class="controls" type="date" name="Fecha" id="Fecha" placeholder="Ingresa la Fecha">
+        <label>Cantidad</label>
+        <input class="controls" type="number" name="cantidad" id="cantidad" placeholder="Ingresa la cantidad ">
+
+        <a href="/carrito/agregar"><input class="buttons" type="submit" value="Guardar"></a>
+        <a href="/carrito"><input class="buttons" type="button" value="Cancelar"></a>
+    </form>
+</body>
+</html>

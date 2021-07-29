@@ -1,0 +1,81 @@
+{% extends 'comunes/base.html' %}
+{% block navbar %}
+{{super()}}
+{% include 'comunes/menu.html' %}
+{% endblock %}
+{% block contenido %}
+<link rel="stylesheet" href="{{url_for('static',filename='css/styletarjeta.css')}}">
+<div>
+    <h1 class="bg-primary bg-lg text-center">Edición de Carrito</h1>
+    <form class="form-Carrito" action="/carrito/editar" method="post">
+        <div class="form-group">
+            <label>idCarrito</label>
+            <input class="controls" type="number" name="idCarrito" value="{{carrito.idCarrito}}">
+        </div>
+        <div class="form-group">
+            <label>idUsuario</label>
+            <input class="controls" type="number" name="idUsuario"  value="{{carrito.idUsuario}}">
+        </div>
+        <div class="form-group">
+            <label>idProducto</label>
+            <input class="controls" type="number" name="idProducto" value="{{carrito.idProducto}}">
+        </div>
+        <div class="form-group">
+            <label>Fecha</label>
+            <input class="controls" type="date" name="Fecha" value="{{carrito.fecha}}">
+        </div>
+        <div class="form-group">
+            <label>Cantidad</label>
+            <input class="controls" type="number" name="cantidad" value="{{carrito.cantidad}}">
+        </div>
+        <div class="controls">
+            <label for="estatus">Estatus:</label>
+            {% if carrito.estatus=='Activa' %}
+            <input type="checkbox" name="estatus" value="Activa" checked>
+            {% else %}
+            <input type="checkbox" name="estatus" value="Activa">
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary">
+            <span class="glyphicon glyphicon-floppy-disk"></span>
+            Guardar
+        </button>
+        <a href="#" class="btn btn-danger" data-toggle="modal" data-target="#borrar">
+            <span class="glyphicon glyphicon-trash"></span>
+            Eliminar
+        </a>
+        <a href="/carrito" class="btn btn-info">
+            <span class="glyphicon glyphicon-arrow-left"></span>
+            Cancelar
+        </a>
+    </form>
+
+
+</div>
+</div>
+</div>
+
+<!-- Modal para ver el cuadro de dialogo de eliminar-->
+<div id="borrar" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Eliminación de Carrito</h4>
+            </div>
+            <div class="modal-body">
+                <p>¿ Estas seguro de eliminar el Carrito:<b>{{carrito.idCarrito}} ?</b> </p>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-primary" href="/carrito/eliminar/{{tar.idTarjeta}}">Aceptar</a>
+                <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+{% endblock %}
