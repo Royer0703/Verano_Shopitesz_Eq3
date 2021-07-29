@@ -7,38 +7,38 @@
 <link rel="stylesheet" href="{{url_for('static',filename='css/styletarjeta.css')}}">
 <div>
     <h1 class="bg-primary bg-lg text-center">Edición de Detalle pedidos</h1>
-    <form action="/pedidos/EditarPedido" method="post">
+    <form action="/Detallepedidos/EditarPedido" method="post">
         <div class="form-group">
             <label for="idDetalle">idDetalle:</label>
-            <input type="text" name="idDetalle" class="controls" value='{{DetallePedido.idDetalle}}' readonly class="controls">
+            <input type="number" name="idDetalle" class="controls" value='{{DetallePedido.idDetalle}}' readonly class="controls">
         </div>
         <div class="form-group">
             <label for="idPedido">idPedido:</label>
-            <input type="text" name="idPedido" class="controls" value='{{DetallePedido.idPedido}}'  class="controls">
+            <input type="number" name="idPedido" class="controls" value='{{DetallePedido.idPedido}}'  class="controls">
         </div>
         <div class="form-group">
             <label for="idProducto">idProducto:</label>
-            <input type="text" name="idProducto" class="controls" value='{{DetallePedido.idProducto}}'  class="controls">
+            <input type="number" name="idProducto" class="controls" value='{{DetallePedido.idProducto}}'  class="controls">
         </div>
         <div class="form-group">
             <label for="precio">precio:</label>
-            <input type="text" name="precio" class="controls" value='{{DetallePedido.precio}}'  class="controls">
+            <input type="number" name="precio" class="controls" value='{{DetallePedido.precio}}'  class="controls">
         </div>
         <div class="form-group">
             <label for="cantidadPedida">cantidadPedida:</label>
-            <input type="date" name="cantidadPedida" class="controls" value='{{DetallePedido.cantidadPedida}}'  class="controls">
+            <input type="number" name="cantidadPedida" class="controls" value='{{DetallePedido.cantidadPedida}}'  class="controls">
         </div>
         <div class="form-group">
             <label for="cantidadEnviada">cantidadEnviada:</label>
-            <input type="date" name="cantidadEnviada" class="controls" value='{{DetallePedido.cantidadEnviada}}'  class="controls">
+            <input type="number" name="cantidadEnviada" class="controls" value='{{DetallePedido.cantidadEnviada}}'  class="controls">
         </div>
         <div class="form-group">
             <label for="cantidadAceptada">cantidadAceptada:</label>
-            <input type="date" name="cantidadAceptada" class="controls" min="0" value='{{DetallePedido.cantidadAceptada}}'  class="controls">
+            <input type="number" name="cantidadAceptada" class="controls" min="0" value='{{DetallePedido.cantidadAceptada}}'  class="controls">
         </div>
         <div class="form-group">
             <label for="cantidadRechazada">cantidadRechazada:</label>
-            <input type="date" name="cantidadRechazada" class="controls" value='{{DetallePedido.cantidadRechazada}}'  class="controls">
+            <input type="number" name="cantidadRechazada" class="controls" value='{{DetallePedido.cantidadRechazada}}'  class="controls">
         </div>
         <div class="form-group">
             <label for="subtotal">subtotal:</label>
@@ -46,7 +46,7 @@
         </div>
         <div class="form-group">
             <label for="comentario">comentario:</label>
-            <input type="date" name="comentario" class="controls" value='{{DetallePedido.comentario}}'  class="controls">
+            <input type="text" name="comentario" class="controls" value='{{DetallePedido.comentario}}'  class="controls">
         </div>
         <div class="controls">
             <label for="estatus">ESTATUS:</label>
