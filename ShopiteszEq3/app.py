@@ -2,7 +2,7 @@ from datetime import timedelta
 
 from flask import Flask,render_template,request,redirect,url_for,flash,session,abort
 from flask_bootstrap import Bootstrap
-from modelo.Dao import db, Categoria, Producto, Usuario, Envios, Paqueterias, Tarjetas,Pedidos,DetallePedido
+from modelo.Dao import db, Categoria, Producto, Usuario, Envios, Paqueterias, Tarjetas, Pedidos, DetallePedido, Carrito
 from flask_login import login_required,login_user,logout_user,current_user,LoginManager
 app = Flask(__name__)
 Bootstrap(app)
@@ -540,7 +540,7 @@ def agregarTarjeta():
 @app.route('/usuarios/Tarjetas')
 def consultaTarjetas():
     tar=Tarjetas()
-    return render_template('tarjetas/consultageneral.html', Tarjetas = tar.consultaGeneral())
+    return render_template('tarjetas/consultageneral.html', tar=tar.consultaGeneral())
 
 #REDIRECCIONA A LA PAGINA PARA EDITAR TARJETAS
 @app.route('/usuarios/EditarTarjeta',methods=['POST'])
@@ -576,8 +576,73 @@ def eliminarTarjeta(id):
 @app.route('/Tarjetas/<int:id>')
 def consultarTarjeta(id):
     tar = Tarjetas()
-    ur = Usuario()
-    return render_template('tarjetas/editar.html', tar = tar.consultaIndividuall(id))
+    return render_template('tarjetas/editar.html', tar=tar.consultaIndividuall(id))
+
+
+#CARRITO-------------------------------------------------
+@app.route('/carrito/nuevo')
+def agregaCarrito():
+    return render_template('/carrito/agregar.html')
+
+
+@app.route('/carrito/agregar',methods=['post'])
+def agregarCarrito():
+    #try:
+    carrito=Carrito()
+    carrito.idUsuario = request.form['idUsuario']
+    carrito.idProducto = request.form['idProducto']
+    carrito.fecha = request.form['fecha']
+    carrito.cantidad = request.form['cantidad']
+    carrito.estatus = 'Activa'
+    carrito.agregar()
+        #flash('¡ Tarjeta agregada con exito !')
+    #except:
+       # flash('¡ Error al agregar la Tarjeta !')
+    return redirect(url_for('consultarCarrito'))
+
+
+@app.route('/carrito')
+def consultarCarrito():
+    carrito=Carrito()
+    return render_template('carrito/consultageneral.html', carrito=carrito.consultaGeneral())
+
+
+@app.route('/carrito/editar',methods=['POST'])
+def editarCarrito():
+    #try:
+    carrito=Carrito()
+    carrito.idCarrito = request.form['idCarrito']
+    carrito.idUsuario = request.form['idUsuario']
+    carrito.idProducto = request.form['idProducto']
+    carrito.fecha = request.form['fecha']
+    carrito.cantidad = request.form['cantidad']
+    carrito.estatus = request.values.get("estatus","Inactiva")
+    carrito.editar()
+    #flash('¡ Tarjeta editada con exito !')
+    #except:
+    #flash('¡ Error al editar la Tarjeta !')
+
+    return redirect(url_for('consultarCarrito'))
+
+#ELIMINAR TARJETAS
+@app.route('/carrito/eliminar/<int:id>')
+def eliminarCarrito(id):
+    try:
+        carrito=Carrito()
+        #tarjeta.eliminar(id)
+        carrito.eliminacionLogica(id)
+        flash('Carrito eliminado con exito')
+    except:
+        flash('Error al eliminar el carrito')
+    return redirect(url_for('consultarCarrito'))
+
+#CONSULTAR TARJETA ESPECIFICA
+@app.route('/carrito/<int:id>')
+def consultaCarrito(id):
+    carrito = Carrito()
+    return render_template('carrito/editar.html', carrito=carrito.consultaIndividual(id))
+
+
 
 #detallepedidos*******************************************************************************************
 @app.route('/Detallepedido')#---
@@ -631,7 +696,7 @@ def altaDetPedido():
         #flash('¡ Tarjeta agregada con exito !')
     #except:
        # flash('¡ Error al agregar la Tarjeta !')
-    return redirect(url_for('consultarPedidos'))
+    return redirect(url_for('consultarDP'))
 
 @app.route('/DetallePedidos/<int:id>')
 @login_required

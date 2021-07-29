@@ -22,7 +22,7 @@
         </div>
         <div class="form-group">
             <label>Fecha</label>
-            <input class="controls" type="date" name="Fecha" value="{{carrito.fecha}}">
+            <input class="controls" type="date" name="fecha" value="{{carrito.fecha}}">
         </div>
         <div class="form-group">
             <label>Cantidad</label>
@@ -69,7 +69,7 @@
                 <p>¿ Estas seguro de eliminar el Carrito:<b>{{carrito.idCarrito}} ?</b> </p>
             </div>
             <div class="modal-footer">
-                <a class="btn btn-primary" href="/carrito/eliminar/{{tar.idTarjeta}}">Aceptar</a>
+                <a class="btn btn-primary" href="/carrito/eliminar/{{carrito.idCarrito}}">Aceptar</a>
                 <button type="button" class="btn btn-info" data-dismiss="modal">Cancelar</button>
             </div>
         </div>

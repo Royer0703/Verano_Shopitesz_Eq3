@@ -311,11 +311,45 @@ class Tarjetas(db.Model):
         tar.estatus='Inactiva'
         tar.editar()
 
+#TABLA DE CARRITO
+class Carrito(db.Model):
+    _tablename_='Carrito'
+    idCarrito = Column( Integer, primary_key = True )
+    idUsuario = Column( Integer,ForeignKey('Usuarios.idUsuario'))
+    idProducto = Column( Integer,ForeignKey('Productos.idProducto'))
+    fecha = Column(String, nullable = False )
+    cantidad = Column(Integer, nullable = False )
+    estatus = Column(String, nullable = False )
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividual(self,id):
+        return Carrito.query.get(id)
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self,id):
+        carrito=self.consultaIndividuall(id)
+        db.session.delete(carrito)
+        db.session.commit()
+
+    def eliminacionLogica(self,id):
+        carrito = self.consultaIndividual(id)
+        carrito.estatus='Inactiva'
+        carrito.editar()
+
 #DETALLEPEDIDOS*********************************************************************
 class DetallePedido(UserMixin,db.Model):
     __tablename__='DetallePedidos'
     idDetalle=Column(Integer,primary_key=True)
-    idPedido= Column( Integer,ForeignKey('Pedido.idPedido') )
+    idPedido= Column( Integer,ForeignKey('Pedidos.idPedido') )
     idProducto= Column( Integer,ForeignKey('Productos.idProducto') )
     precio=Column(Integer,nullable=False)
     cantidadPedida=Column(Integer,nullable=False)
@@ -325,6 +359,7 @@ class DetallePedido(UserMixin,db.Model):
     subtotal=Column(Integer,nullable=False)
     estatus=Column(String,nullable=False)
     comentario=Column(String,nullable=False)
+
 
     def consultaGeneral(self):
         return self.query.all()
