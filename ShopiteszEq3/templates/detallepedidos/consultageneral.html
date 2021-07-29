@@ -8,7 +8,7 @@
     <h1>LISTADO DE DETALLES</h1>
     <div class="table-responsive">
         {% if current_user.is_authenticated and current_user.is_admin() %}
-        <a href="/Detallepedido/agregar" class="btn btn-success">
+        <a href="/Detallepedidos/agregar" class="btn btn-success">
             <span class="glyphicon glyphicon-plus-sign"></span>
            Agregar Detalle
        </a>
@@ -45,7 +45,7 @@
                 <td>{{dep.comentario}}</td>
                 {% if current_user.is_authenticated and current_user.is_admin() %}
                 <td>
-                    <a href="">
+                    <a href="/DetallePedidos/{{dep.idDetalle}}">
                         <span class="glyphicon glyphicon-eye-open"></span>
                     </a>
                 </td>

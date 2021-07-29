@@ -580,11 +580,81 @@ def consultarTarjeta(id):
     return render_template('tarjetas/editar.html', tar = tar.consultaIndividuall(id))
 
 #detallepedidos*******************************************************************************************
-@app.route('/Detallepedido')
+@app.route('/Detallepedido')#---
 @login_required
 def consultarDP():
     dep = DetallePedido()
     return render_template('detallepedidos/consultageneral.html', DetallePedido=dep.consultaGeneral())
+
+@app.route('/Detallepedidos/agregar')#---
+def agregarDetPedido():
+    return render_template('/detallepedidos/agregar.html')
+
+@app.route('/Detallepedidos/EditarPedido',methods=['POST'])
+def agregarDetPedidos():
+    #try:
+    dep=DetallePedido()
+    dep.idDetalle = request.form['idDetalle']
+    dep.idPedido = request.form['idPedido']
+    dep.idProducto = request.form['idProducto']
+    dep.precio = request.form['precio']
+    dep.cantidadPedida = request.form['cantidadPedida']
+    dep.cantidadEnviada = request.form['cantidadEnviada']
+    dep.cantidadAceptada = request.form['cantidadAceptada']
+    dep.cantidadRechazada = request.form['cantidadRechazada']
+    dep.subtotal = request.form['subtotal']
+    dep.estatus = request.values.get("estatus","Inactiva")
+    dep.comentario = request.form['comentario']
+    dep.editar()
+    #flash('¡ Tarjeta editada con exito !')
+    #except:
+    #flash('¡ Error al editar la Tarjeta !')
+
+    return redirect(url_for('consultarDetallePedidos'))
+
+@app.route('/Detallepedidos/Alta',methods=['post'])
+def altaDetPedido():
+    #try:
+    dep=DetallePedido()
+    dep.idDetalle = request.form['idDetalle']
+    dep.idPedido = request.form['idPedido']
+    dep.idProducto = request.form['idProducto']
+    dep.precio = request.form['precio']
+    dep.cantidadPedida = request.form['cantidadPedida']
+    dep.cantidadEnviada = request.form['cantidadEnviada']
+    dep.cantidadAceptada = request.form['cantidadAceptada']
+    dep.cantidadRechazada = request.form['cantidadRechazada']
+    dep.subtotal = request.form['subtotal']
+    dep.estatus = 'Activa'
+    dep.comentario = request.form['comentario']
+    dep.agregar()
+        #flash('¡ Tarjeta agregada con exito !')
+    #except:
+       # flash('¡ Error al agregar la Tarjeta !')
+    return redirect(url_for('consultarPedidos'))
+
+@app.route('/DetallePedidos/<int:id>')
+@login_required
+def eeditarDePedidos(id):
+    dep = DetallePedido()
+    return render_template('pedidos/editar.html', DetallePedido = dep.consultaIndividuall(id))
+
+@app.route('/Detallepedidos/eliminar/<int:id>')
+@login_required
+def eliminarDePedido(id):
+    if current_user.is_authenticated and current_user.is_admin():
+        try:
+            dep=DetallePedido()
+            dep.eliminacionLogica(id)
+            flash('Detalle eliminado con exito')
+        except:
+            flash('Error al eliminar Detalles')
+        return redirect(url_for('consultarDetallePedidos'))
+    else:
+        return redirect(url_for('mostrar_login'))
+
+
+#**************************************************************************************************
 
 #manejo de errores
 @app.errorhandler(404)
