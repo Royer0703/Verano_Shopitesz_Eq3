@@ -313,7 +313,7 @@ class Tarjetas(db.Model):
 
 #DETALLEPEDIDOS*********************************************************************
 class DetallePedido(UserMixin,db.Model):
-    __tablename__='DetallePedido'
+    __tablename__='DetallePedidos'
     idDetalle=Column(Integer,primary_key=True)
     idPedido= Column( Integer,ForeignKey('Pedido.idPedido') )
     idProducto= Column( Integer,ForeignKey('Productos.idProducto') )

@@ -579,6 +579,13 @@ def consultarTarjeta(id):
     ur = Usuario()
     return render_template('tarjetas/editar.html', tar = tar.consultaIndividuall(id))
 
+#detallepedidos*******************************************************************************************
+@app.route('/Detallepedido')
+@login_required
+def consultarDP():
+    dep = DetallePedido()
+    return render_template('detallepedidos/consultageneral.html', DetallePedido=dep.consultaGeneral())
+
 #manejo de errores
 @app.errorhandler(404)
 def error_404(e):
@@ -591,10 +598,5 @@ if __name__=='__main__':
     db.init_app(app)#Inicializar la BD - pasar la configuración de la url de la BD
     app.run(debug=True)
 
-#detallepedidos*******************************************************************************************
-@app.route('/Detallepedido')
-@login_required
-def consultarDP():
-    dep = DetallePedido()
-    return render_template('detallepedidos/consultageneral.html', DetallePedido=dep.consultaGeneral())
+
 
