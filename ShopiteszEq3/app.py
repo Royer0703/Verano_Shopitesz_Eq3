@@ -675,7 +675,7 @@ def agregarDetPedidos():
     #except:
     #flash('¡ Error al editar la Tarjeta !')
 
-    return redirect(url_for('consultarDetallePedidos'))
+    return redirect(url_for('consultarDP'))
 
 @app.route('/Detallepedidos/Alta',methods=['post'])
 def altaDetPedido():
@@ -702,7 +702,7 @@ def altaDetPedido():
 @login_required
 def eeditarDePedidos(id):
     dep = DetallePedido()
-    return render_template('pedidos/editar.html', DetallePedido = dep.consultaIndividuall(id))
+    return render_template('detallepedidos/editar.html', DetallePedido = dep.consultaIndividuall(id))
 
 @app.route('/Detallepedidos/eliminar/<int:id>')
 @login_required
@@ -714,7 +714,7 @@ def eliminarDePedido(id):
             flash('Detalle eliminado con exito')
         except:
             flash('Error al eliminar Detalles')
-        return redirect(url_for('consultarDetallePedidos'))
+        return redirect(url_for('consultarDP'))
     else:
         return redirect(url_for('mostrar_login'))
 

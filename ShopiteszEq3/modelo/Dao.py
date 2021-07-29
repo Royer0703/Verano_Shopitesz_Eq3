@@ -376,11 +376,11 @@ class DetallePedido(UserMixin,db.Model):
         db.session.commit()
 
     def eliminar(self,id):
-        dp=self.consultaIndividuall(id)
-        db.session.delete(dp)
+        dep=self.consultaIndividuall(id)
+        db.session.delete(dep)
         db.session.commit()
 
     def eliminacionLogica(self,id):
-        dp = self.consultaIndividuall(id)
-        dp.estatus='Inactiva'
-        dp.editar()
+        dep = self.consultaIndividuall(id)
+        dep.estatus='Inactiva'
+        dep.editar()
